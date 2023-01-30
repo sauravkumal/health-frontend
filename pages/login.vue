@@ -56,21 +56,6 @@ export default {
       password: '',
       loggingIn: false,
       showPassword: false,
-      playerId: null
-    }
-  },
-
-  mounted() {
-    if (this.$OneSignal) {
-      this.$OneSignal.push(() => {
-        this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
-          if (isEnabled) {
-            this.$OneSignal.getUserId((userId) => {
-              this.playerId = userId
-            })
-          }
-        })
-      })
     }
   },
 
@@ -84,7 +69,6 @@ export default {
               data: {
                 email: this.email,
                 password: this.password,
-                playerId: this.playerId
               }
             }).then(resp => {
               this.loggingIn = false
