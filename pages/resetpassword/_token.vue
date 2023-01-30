@@ -4,7 +4,7 @@
 
       <v-card-title class="justify-center">
         <v-avatar size="100">
-          <v-img src="/mwaw-logo.png"></v-img>
+          <v-icon>mdi-account</v-icon>
         </v-avatar>
       </v-card-title>
       <v-card-title class="justify-center">
