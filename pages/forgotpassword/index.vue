@@ -56,7 +56,7 @@ export default {
               .then(resp => {
                 this.model.email = '';
                 this.$refs.validator.reset()
-                this.$root.$emit('toast', {text: 'Please check your email for password reset link', type: 'success'})
+                this.$root.$emit('toast', {text: resp.data.message, type: 'success'})
                 this.loading = false
               }).catch(error => {
               this.loading = false

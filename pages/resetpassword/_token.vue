@@ -101,7 +101,7 @@ export default {
             .$post("/backend/reset-password", this.form)
             .then((resp) => {
               this.loading = false
-              this.$root.$emit('toast', {text: resp.data.message, type: 'success'})
+              this.$root.$emit('toast', {text: 'Your password has been reset successfully', type: 'success'})
               this.$router.push('/login')
             }).catch(error => {
             this.loading = false
