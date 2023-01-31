@@ -1,11 +1,25 @@
 <template>
-  <div>
-    <div class="tw-text-lg">{{ category.title }}</div>
-    <div class="tw-flex tw-space-x-4">
-      <SubCategory :sub-category="subCategory" :key="index"
-                   v-for="(subCategory, index) in category.subCategories"></SubCategory>
-    </div>
-  </div>
+  <table class="tw-w-full">
+    <thead>
+    <tr @mouseover.stop="showActions = true" @mouseout.stop="showActions = false" class="tw-w-full">
+      <td class="tw-text-lg">
+        <v-avatar size="25" color="primary" class="tw-text-white">{{ $vnode.key + 1 }}</v-avatar>
+        <span class="tw-ml-4">{{ category.title }}</span>
+        <template v-if="showActions">
+          <v-btn text x-small color="primary">Edit Title</v-btn>
+          <v-btn text x-small color="primary">Add New Sub category</v-btn>
+        </template>
+      </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td v-for="(subCategory, index) in category.subCategories" :key="index">
+        <SubCategory :sub-category="subCategory"/>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
@@ -14,7 +28,12 @@ import SubCategory from "./SubCategory.vue";
 export default {
   name: "Category",
   components: {SubCategory},
-  props: ['category']
+  props: ['category'],
+  data() {
+    return {
+      showActions: false
+    }
+  }
 }
 </script>
 

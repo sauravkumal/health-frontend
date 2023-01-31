@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div class="tw-text-base">{{ product.title }}</div>
-  </div>
+  <div>{{ product.title }}</div>
 </template>
 
 <script>
