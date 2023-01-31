@@ -1,5 +1,5 @@
 <template>
-  <table class="tw-border tw-border-solid tw-w-full tw-m-2 tw-p-2">
+  <table class="tw-w-full tw-h-full">
     <thead>
     <tr>{{ subCategory.title }}</tr>
     </thead>

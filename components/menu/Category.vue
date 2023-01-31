@@ -1,7 +1,7 @@
 <template>
   <table class="tw-w-full">
     <thead>
-    <tr @mouseover.stop="showActions = true" @mouseout.stop="showActions = false" class="tw-w-full">
+    <tr class="tw-w-full">
       <td class="tw-text-lg">
         <v-avatar size="25" color="primary" class="tw-text-white">{{ $vnode.key + 1 }}</v-avatar>
         <span class="tw-ml-4">{{ category.title }}</span>
@@ -14,7 +14,8 @@
     </thead>
     <tbody>
     <tr>
-      <td v-for="(subCategory, index) in category.subCategories" :key="index">
+      <td class="tw-border tw-border-solid tw-border-gray-500" v-for="(subCategory, index) in category.subCategories"
+          :key="index">
         <SubCategory :sub-category="subCategory"/>
       </td>
     </tr>
