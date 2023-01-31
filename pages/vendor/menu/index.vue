@@ -2,6 +2,7 @@
   <v-card flat>
     <v-card-title>Menu</v-card-title>
     <v-card-text>
+      <Category :category="category" v-for="(category, index) in menu" :key="index"/>
 
     </v-card-text>
     <v-card-actions></v-card-actions>
@@ -10,11 +11,16 @@
 </template>
 
 <script>
+import Category from "../../../components/menu/Category.vue";
+
 export default {
   name: "IndexPage",
+  components: {Category},
+  middleware: 'auth',
+
   data() {
     return {
-      items: [],
+      menu: [],
     }
   },
 
@@ -25,9 +31,9 @@ export default {
   methods: {
     fetch() {
       this.loading = true
-      this.$axios.get('/backend/api/categories', {params: {itemsPerPage: -1}})
+      this.$axios.get('/backend/api/vendor/menu')
         .then(resp => {
-          this.items = resp.data.data
+          this.menu = resp.data.data
         })
     },
   }
