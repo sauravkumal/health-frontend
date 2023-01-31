@@ -1,13 +1,17 @@
 <template>
-  <table class="tw-w-full">
+  <table class="tw-w-full" @mouseenter="showActions=true" @mouseleave="showActions=false">
     <thead>
     <tr class="tw-w-full">
       <td class="tw-text-lg tw-pb-2">
         <v-avatar size="25" color="primary" class="tw-text-white">{{ $vnode.key + 1 }}</v-avatar>
         <span class="tw-ml-4">{{ category.title }}</span>
         <template v-if="showActions">
-          <v-btn text x-small color="primary">Edit Title</v-btn>
-          <v-btn text x-small color="primary">Add New Sub category</v-btn>
+          <v-btn text x-small @mouseenter.native @mouseleave.native
+                 color="primary">Edit Title
+          </v-btn>
+          <v-btn text x-small @mouseenter.native @mouseleave.native
+                 color="primary">Add New Sub category
+          </v-btn>
         </template>
       </td>
     </tr>
