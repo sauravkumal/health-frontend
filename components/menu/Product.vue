@@ -1,5 +1,5 @@
 <template>
-  <div>{{ product.title }}</div>
+  <div> {{ $vnode.key + 1 }}. {{ product.title }}</div>
 </template>
 
 <script>

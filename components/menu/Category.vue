@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     <tr>
-      <td>
+      <td class="tw-border tw-border-solid tw-border-gray-200 tw-p-4 tw-bg-gray-50">
         <Draggable class="tw-flex tw-space-x-2" v-model="category.subCategories" @start="drag=true"
                    @end="drag=false"
                    ghost-class="ghost">
