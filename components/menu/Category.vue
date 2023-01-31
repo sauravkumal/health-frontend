@@ -14,9 +14,12 @@
     </thead>
     <tbody>
     <tr>
-      <td class="tw-border tw-border-solid tw-border-gray-500" v-for="(subCategory, index) in category.subCategories"
-          :key="index">
-        <SubCategory :sub-category="subCategory"/>
+      <td>
+        <Draggable class="tw-flex tw-space-x-2" v-model="category.subCategories" @start="drag=true"
+                   @end="drag=false"
+                   ghost-class="ghost">
+          <SubCategory :key="index" :sub-category="subCategory" v-for="(subCategory, index) in category.subCategories"/>
+        </Draggable>
       </td>
     </tr>
     </tbody>
@@ -25,19 +28,23 @@
 
 <script>
 import SubCategory from "./SubCategory.vue";
+import draggable from "vuedraggable";
 
 export default {
   name: "Category",
-  components: {SubCategory},
+  components: {SubCategory, Draggable: draggable},
   props: ['category'],
   data() {
     return {
-      showActions: false
+      showActions: false,
+      drag: false
     }
   }
 }
 </script>
 
 <style scoped>
-
+.ghost {
+  @apply tw-opacity-50 tw-bg-gray-300;
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <table class="tw-w-full tw-h-full">
     <thead>
-    <tr>{{ subCategory.title }}</tr>
+    <tr>{{ $vnode.key + 1 }}. {{ subCategory.title }}</tr>
     </thead>
     <tbody>
     <tr v-for="(product, index) in subCategory.products" :key="index">
@@ -15,6 +15,7 @@
 
 <script>
 import Product from "./Product.vue";
+import draggable from "vuedraggable";
 
 export default {
   name: "SubCategory",

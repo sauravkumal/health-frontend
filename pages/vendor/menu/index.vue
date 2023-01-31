@@ -19,7 +19,7 @@ import draggable from "vuedraggable";
 
 export default {
   name: "IndexPage",
-  components: {Category, Draggable: draggable},
+    components: {Category, Draggable: draggable},
   middleware: 'auth',
 
   data() {
