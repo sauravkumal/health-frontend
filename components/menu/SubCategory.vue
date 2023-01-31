@@ -31,6 +31,29 @@ export default {
     return {
       drag: false
     }
+  },
+  watch: {
+    'subCategory': {
+      handler: function (newVal) {
+        if (newVal.position !== this.$vnode.key) {
+          this.updatePosition()
+        }
+      }, immediate: true
+    }
+  },
+  methods: {
+    updatePosition() {
+      this.$axios.put("/backend/api/subCategories/" + this.subCategory.id, {
+        position: this.$vnode.key
+      }).then(resp => {
+      })
+        .catch(error => {
+          this.$root.$emit("toast", {
+            text: "Couldn't update",
+            type: "error",
+          })
+        })
+    }
   }
 }
 </script>
