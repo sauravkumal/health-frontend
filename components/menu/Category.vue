@@ -2,7 +2,7 @@
   <table class="tw-w-full">
     <thead>
     <tr class="tw-w-full">
-      <td class="tw-text-lg">
+      <td class="tw-text-lg tw-pb-2">
         <v-avatar size="25" color="primary" class="tw-text-white">{{ $vnode.key + 1 }}</v-avatar>
         <span class="tw-ml-4">{{ category.title }}</span>
         <template v-if="showActions">
