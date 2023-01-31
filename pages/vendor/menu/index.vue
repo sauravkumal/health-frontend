@@ -1,6 +1,13 @@
 <template>
   <v-card flat>
-    <v-card-title>Menu</v-card-title>
+    <v-card-title class="tw-justify-between">
+      <div>Menu</div>
+      <div>
+        <v-text-field single-line outlined label="Search.."
+                      dense hide-details
+                      append-icon="mdi-magnify"></v-text-field>
+      </div>
+    </v-card-title>
     <v-card-text>
       <Draggable class="tw-flex tw-flex-col tw-space-y-4" v-model="menu" @start="drag=true" @end="drag=false"
                  ghost-class="ghost">
@@ -19,7 +26,7 @@ import draggable from "vuedraggable";
 
 export default {
   name: "IndexPage",
-    components: {Category, Draggable: draggable},
+  components: {Category, Draggable: draggable},
   middleware: 'auth',
 
   data() {
