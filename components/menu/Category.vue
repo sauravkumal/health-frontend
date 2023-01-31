@@ -2,12 +2,22 @@
   <table class="tw-w-full" @mouseenter="showActions=true" @mouseleave="showActions=false">
     <thead>
     <tr class="tw-w-full">
-      <td class="tw-text-lg tw-pb-2">
+      <td class="tw-flex tw-space-x-4 tw-text-lg tw-pb-2 tw-items-center">
         <v-avatar size="25" color="primary" class="tw-text-white">{{ $vnode.key + 1 }}</v-avatar>
-        <span class="tw-ml-4">{{ category.title }}</span>
-        <template v-if="showActions">
+        <template v-if="edit">
+          <ValidationObserver ref="validator">
+            <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
+              <v-text-field v-model="model.title" dense single-line label="Title" hide-details="auto"
+                            outlined
+                            :error-messages="errors"
+              ></v-text-field>
+            </ValidationProvider>
+          </ValidationObserver>
+        </template>
+        <span v-else class="tw-ml-4">{{ category.title }}</span>
+        <template v-if="showActions && !edit">
           <v-btn text x-small @mouseenter.native @mouseleave.native
-                 color="primary">Edit Title
+                 color="primary" @click="showEdit">Edit
           </v-btn>
           <v-btn text x-small @mouseenter.native @mouseleave.native
                  color="primary">Add New Sub category
@@ -41,7 +51,9 @@ export default {
   data() {
     return {
       showActions: false,
-      drag: false
+      drag: false,
+      edit: false,
+      model: null
     }
   },
   watch: {
@@ -54,6 +66,10 @@ export default {
     }
   },
   methods: {
+    showEdit() {
+      this.model = JSON.parse(JSON.stringify(this.category))
+      this.edit = true
+    },
     updatePosition() {
       this.$axios.put("/backend/api/categories/" + this.category.id, {
         position: this.$vnode.key
