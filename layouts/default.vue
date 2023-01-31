@@ -146,10 +146,8 @@
       </v-menu>
 
     </v-app-bar>
-    <v-main class="tw-bg-gray-200">
-      <v-container>
-        <Nuxt/>
-      </v-container>
+    <v-main>
+      <Nuxt/>
     </v-main>
     <v-snackbar v-model="snackbar" :color="snackbarColor" app>
       {{ snackbarText }}
@@ -188,6 +186,11 @@ export default {
           icon: 'mdi-home',
           title: 'Dashboard',
           to: '/'
+        },
+        {
+          icon: 'mdi-home',
+          title: 'Menu',
+          to: '/vendor/menu'
         },
       ],
 
