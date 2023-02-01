@@ -124,6 +124,7 @@ export default {
       if (window.confirm('Are you sure you want to delete? This action cannot be undone.')) {
         this.$axios.delete("/backend/api/categories/" + this.category.id)
           .then(resp => {
+            this.$emit('edited')
             this.$root.$emit("toast", {
               text: "Deleted successfully",
               type: "success",
