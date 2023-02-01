@@ -26,15 +26,17 @@
       </div>
     </v-card-title>
     <v-card-text>
-      <Draggable class="tw-flex tw-flex-col tw-space-y-4" v-model="menu" @start="drag=true" @end="drag=false"
-                 ghost-class="ghost">
-        <Category @edited="fetch"
-                  @createSubCategory="createSubCategory"
-                  ref="categories"
-                  :category="category"
-                  @createProduct="createProduct"
-                  v-for="(category, index) in menu" :key="index"/>
-      </Draggable>
+      <div class="tw-p-2 tw-border tw-border-solid tw-border-gray-200">
+        <Draggable class="tw-flex tw-flex-col tw-space-y-4" v-model="menu" @start="drag=true" @end="drag=false"
+                   ghost-class="ghost">
+          <Category @edited="fetch"
+                    @createSubCategory="createSubCategory"
+                    ref="categories"
+                    :category="category"
+                    @createProduct="createProduct"
+                    v-for="(category, index) in menu" :key="index"/>
+        </Draggable>
+      </div>
     </v-card-text>
     <v-card-actions></v-card-actions>
   </v-card>
