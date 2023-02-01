@@ -1,7 +1,10 @@
 <template>
   <v-card flat>
     <v-card-title class="tw-justify-between">
-      <div>Menu</div>
+      <div class="tw-flex tw-space-x-6 tw-items-center">
+        <div>Menu</div>
+        <v-switch color="success" label="Published" v-model="publishMenu"></v-switch>
+      </div>
       <div class="tw-flex tw-space-x-2 tw-items-end">
         <CategoryCreate @created="fetch" :position="menu.length"></CategoryCreate>
         <SubCategoryCreate @created="fetch" v-model="subCategoryModel.dialog" :category-id="subCategoryModel.categoryId"
@@ -54,6 +57,7 @@ export default {
   data() {
     return {
       drag: false,
+      publishMenu: this.$auth.user.publish_menu,
       menu: [],
       search: null,
       subCategoryModel: {
@@ -77,6 +81,9 @@ export default {
       if (ref) {
         this.$vuetify.goTo(ref)
       }
+    },
+    publishMenu: function (newVal) {
+      this.updatePublishMenu()
     }
   },
 
@@ -91,6 +98,18 @@ export default {
         .then(resp => {
           this.menu = resp.data.data
         })
+    },
+
+    updatePublishMenu() {
+      this.$axios.post('/backend/api/vendor/menu/publish', {publish: this.publishMenu})
+        .then(resp => {
+        }).catch(error => {
+        this.$root.$emit("toast", {
+          text: "Couldn't save",
+          type: "error",
+        })
+      })
+
     },
 
     createSubCategory(event) {
