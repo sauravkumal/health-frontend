@@ -4,7 +4,7 @@
   >
     <thead>
     <tr>
-      <td class="tw-flex tw-flex-wrap tw-space-x-2 tw-bg-gray-200 tw-px-2 tw-text-base tw-py-1">
+      <td class="tw-flex tw-flex-wrap tw-space-x-4 tw-bg-gray-200 tw-px-2 tw-text-base tw-py-1 tw-items-center">
         <div>{{ $vnode.key + 1 }}.</div>
         <template v-if="edit">
           <v-form @submit.prevent="saveModel" class="tw-flex tw-space-x-2">
@@ -16,10 +16,10 @@
                 ></v-text-field>
               </ValidationProvider>
             </ValidationObserver>
-            <v-btn type="submit" color="success" icon :loading="saving">
+            <v-btn small type="submit" color="success" icon :loading="saving">
               <v-icon>mdi-check</v-icon>
             </v-btn>
-            <v-btn color="error" icon @click="edit=false">
+            <v-btn small color="error" icon @click="edit=false">
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </v-form>

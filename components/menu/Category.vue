@@ -14,10 +14,10 @@
                 ></v-text-field>
               </ValidationProvider>
             </ValidationObserver>
-            <v-btn type="submit" color="success" icon :loading="saving">
+            <v-btn small type="submit" color="success" icon :loading="saving">
               <v-icon>mdi-check</v-icon>
             </v-btn>
-            <v-btn color="error" icon @click="edit=false">
+            <v-btn small color="error" icon @click="edit=false">
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </v-form>
