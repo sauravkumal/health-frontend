@@ -7,19 +7,21 @@
       <td class="tw-flex tw-flex-wrap tw-space-x-2 tw-bg-gray-200 tw-px-2 tw-text-base tw-py-1">
         <div>{{ $vnode.key + 1 }}. {{ subCategory.title }}</div>
         <template v-if="showActions && !edit">
-          <v-btn text x-small @mouseenter.native @mouseleave.native
-                 color="primary" @click="showEdit">Edit
+          <v-btn icon x-small @mouseenter.native @mouseleave.native
+                 color="primary" @click="showEdit">
+            <v-icon>mdi-pencil</v-icon>
           </v-btn>
-          <v-btn text x-small @mouseenter.native @mouseleave.native
+          <v-btn icon x-small @mouseenter.native @mouseleave.native
                  color="primary"
                  @click="$emit('createProduct',{subCategoryId: subCategory.id,
                   position:subCategory.products.length,
                    subCategoryTitle: subCategory.title
                  })">
-            Add New Product
+            <v-icon>mdi-plus</v-icon>
           </v-btn>
-          <v-btn text x-small @mouseenter.native @mouseleave.native
-                 color="error" @click="remove">Delete
+          <v-btn icon x-small @mouseenter.native @mouseleave.native
+                 color="error" @click="remove">
+            <v-icon>mdi-delete</v-icon>
           </v-btn>
         </template>
       </td>
