@@ -3,8 +3,8 @@
     <v-card-title class="tw-justify-between">
       <div>Menu</div>
       <div class="tw-flex tw-space-x-2 tw-items-end">
-        <CategoryCreate :position="menu.length"></CategoryCreate>
-        <SubCategoryCreate v-model="subCategoryModel.dialog" :category-id="subCategoryModel.categoryId"
+        <CategoryCreate @created="fetch" :position="menu.length"></CategoryCreate>
+        <SubCategoryCreate @created="fetch" v-model="subCategoryModel.dialog" :category-id="subCategoryModel.categoryId"
                            :category-title="subCategoryModel.categoryTitle"
                            :position="subCategoryModel.position"/>
         <v-select single-line outlined label="Search.."

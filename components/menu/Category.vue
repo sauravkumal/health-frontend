@@ -109,6 +109,7 @@ export default {
           }).then(resp => {
             this.saving = false
             this.edit = false
+            this.model = null
             this.$emit('edited')
           })
             .catch(error => {

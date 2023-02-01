@@ -59,6 +59,7 @@ export default {
           }).then(resp => {
             this.saving = false
             this.dialog = false
+            this.$emit('created')
           })
             .catch(error => {
               this.saving = false
