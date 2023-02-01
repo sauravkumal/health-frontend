@@ -9,26 +9,28 @@
       </v-btn>
     </template>
 
-    <v-card>
-      <v-card-title class="text-h5 grey lighten-2">
-        Create Category
-      </v-card-title>
+    <v-form @submit.prevent="saveModel">
+      <v-card>
+        <v-card-title class="text-h5 grey lighten-2">
+          Create Category
+        </v-card-title>
 
-      <v-card-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
-      </v-card-text>
-
-      <v-divider></v-divider>
-
-      <v-card-actions>
-        <v-btn depressed color="success">Save</v-btn>
-        <v-btn depressed color="error">Cancel</v-btn>
-      </v-card-actions>
-    </v-card>
+        <v-card-text class="tw-mt-4">
+          <ValidationObserver ref="validator">
+            <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
+              <v-text-field v-model="model.title" dense single-line label="Title" hide-details="auto"
+                            outlined
+                            :error-messages="errors"
+              ></v-text-field>
+            </ValidationProvider>
+          </ValidationObserver>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn depressed type="submit" color="success" :loading="saving">Save</v-btn>
+          <v-btn depressed color="error" @click="dialog = false">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-form>
   </v-dialog>
 </template>
 
@@ -41,26 +43,32 @@ export default {
       dialog: false,
       model: {
         title: ''
-      }
+      },
+      saving: false
     }
   },
   methods: {
     saveModel() {
-      this.$axios.post("/backend/api/categories", {
-        position: this.position,
-        vendor_id: this.$auth.user.id,
-        ...this.model
-      }).then(resp => {
-        this.saving = false
-        this.edit = false
-      })
-        .catch(error => {
-          this.saving = false
-          this.$root.$emit("toast", {
-            text: "Couldn't save",
-            type: "error",
+      this.$refs.validator.validate().then(valid => {
+        if (valid) {
+          this.saving = true
+          this.$axios.post("/backend/api/categories", {
+            position: this.position,
+            vendor_id: this.$auth.user.id,
+            ...this.model
+          }).then(resp => {
+            this.saving = false
+            this.dialog = false
           })
-        })
+            .catch(error => {
+              this.saving = false
+              this.$root.$emit("toast", {
+                text: "Couldn't save",
+                type: "error",
+              })
+            })
+        }
+      })
     }
   }
 }
