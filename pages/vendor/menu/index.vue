@@ -2,7 +2,8 @@
   <v-card flat>
     <v-card-title class="tw-justify-between">
       <div>Menu</div>
-      <div>
+      <div class="tw-flex tw-space-x-2 tw-items-end">
+        <CategoryCreate :position="menu.length"></CategoryCreate>
         <v-select single-line outlined label="Search.."
                   dense hide-details
                   :items="menu"
@@ -27,11 +28,12 @@
 <script>
 import Category from "../../../components/menu/Category.vue";
 import draggable from "vuedraggable";
+import CategoryCreate from "../../../components/menu/CategoryCreate.vue";
 
 
 export default {
   name: "IndexPage",
-  components: {Category, Draggable: draggable},
+  components: {CategoryCreate, Category, Draggable: draggable},
   middleware: 'auth',
 
   data() {
