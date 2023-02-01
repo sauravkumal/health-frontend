@@ -42,7 +42,8 @@
     <tbody>
     <tr>
       <td class="tw-border tw-border-solid tw-border-gray-200 tw-p-4 tw-bg-gray-50">
-        <Draggable class="tw-flex tw-space-x-2" v-model="category.subCategories" @start="drag=true"
+        <Draggable class="tw-flex tw-flex-wrap tw-gap-x-2 tw-gap-y-2" v-model="category.subCategories"
+                   @start="drag=true"
                    @end="drag=false"
                    ghost-class="ghost">
           <SubCategory @edited="$emit('edited')" :key="index" :sub-category="subCategory"
