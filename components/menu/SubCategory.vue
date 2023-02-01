@@ -5,7 +5,26 @@
     <thead>
     <tr>
       <td class="tw-flex tw-flex-wrap tw-space-x-2 tw-bg-gray-200 tw-px-2 tw-text-base tw-py-1">
-        <div>{{ $vnode.key + 1 }}. {{ subCategory.title }}</div>
+        <div>{{ $vnode.key + 1 }}.</div>
+        <template v-if="edit">
+          <v-form @submit.prevent="saveModel" class="tw-flex tw-space-x-2">
+            <ValidationObserver ref="validator">
+              <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
+                <v-text-field v-model="model.title" dense single-line label="Title" hide-details="auto"
+                              outlined
+                              :error-messages="errors"
+                ></v-text-field>
+              </ValidationProvider>
+            </ValidationObserver>
+            <v-btn type="submit" color="success" icon :loading="saving">
+              <v-icon>mdi-check</v-icon>
+            </v-btn>
+            <v-btn color="error" icon @click="edit=false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-form>
+        </template>
+        <div v-else class="tw-ml-2">{{ subCategory.title }}</div>
         <template v-if="showActions && !edit">
           <v-btn icon x-small @mouseenter.native @mouseleave.native
                  color="primary" @click="showEdit">
@@ -56,6 +75,7 @@ export default {
       showActions: false,
       edit: false,
       model: null,
+      saving: false
     }
   },
   watch: {
@@ -83,6 +103,30 @@ export default {
             type: "error",
           })
         })
+    },
+
+    saveModel() {
+      this.$refs.validator.validate().then(valid => {
+        if (valid) {
+          this.saving = true
+          this.$axios.put("/backend/api/subCategories/" + this.model.id, {
+            position: this.$vnode.key,
+            ...this.model
+          }).then(resp => {
+            this.saving = false
+            this.edit = false
+            this.model = null
+            this.$emit('edited')
+          })
+            .catch(error => {
+              this.saving = false
+              this.$root.$emit("toast", {
+                text: "Couldn't save",
+                type: "error",
+              })
+            })
+        }
+      })
     },
 
     remove() {
