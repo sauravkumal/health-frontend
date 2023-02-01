@@ -20,7 +20,8 @@
     <v-card-text>
       <Draggable class="tw-flex tw-flex-col tw-space-y-4" v-model="menu" @start="drag=true" @end="drag=false"
                  ghost-class="ghost">
-        <Category @createSubCategory="createSubCategory" ref="categories" :id="index" :category="category"
+        <Category @edited="fetch" @createSubCategory="createSubCategory" ref="categories" :id="index"
+                  :category="category"
                   v-for="(category, index) in menu" :key="index"/>
       </Draggable>
     </v-card-text>

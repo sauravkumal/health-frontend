@@ -45,7 +45,8 @@
         <Draggable class="tw-flex tw-space-x-2" v-model="category.subCategories" @start="drag=true"
                    @end="drag=false"
                    ghost-class="ghost">
-          <SubCategory :key="index" :sub-category="subCategory" v-for="(subCategory, index) in category.subCategories"/>
+          <SubCategory @edited="$emit('edited')" :key="index" :sub-category="subCategory"
+                       v-for="(subCategory, index) in category.subCategories"/>
         </Draggable>
       </td>
     </tr>
@@ -107,6 +108,7 @@ export default {
           }).then(resp => {
             this.saving = false
             this.edit = false
+            this.$emit('edited')
           })
             .catch(error => {
               this.saving = false
