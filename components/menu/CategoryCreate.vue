@@ -57,6 +57,8 @@ export default {
             vendor_id: this.$auth.user.id,
             ...this.model
           }).then(resp => {
+            this.model.title = ''
+            this.$refs.validator.reset()
             this.saving = false
             this.dialog = false
             this.$emit('created')

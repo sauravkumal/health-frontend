@@ -46,7 +46,8 @@
                    @start="drag=true"
                    @end="drag=false"
                    ghost-class="ghost">
-          <SubCategory @edited="$emit('edited')" :key="index" :sub-category="subCategory"
+          <SubCategory :key="index" :sub-category="subCategory"
+                       v-on="$listeners"
                        v-for="(subCategory, index) in category.subCategories"/>
         </Draggable>
       </td>

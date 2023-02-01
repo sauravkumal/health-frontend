@@ -52,7 +52,8 @@
         <Draggable class="tw-flex tw-flex-col tw-space-y-2 tw-my-2" v-model="subCategory.products" @start="drag=true"
                    @end="drag=false"
                    ghost-class="ghost">
-          <Product @edited="$emit('edited')" :product="product" v-for="(product, index) in subCategory.products"
+          <Product :product="product" v-for="(product, index) in subCategory.products"
+                   v-on="$listeners"
                    :key="index"/>
         </Draggable>
       </td>

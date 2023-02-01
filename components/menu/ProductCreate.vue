@@ -6,7 +6,7 @@
     <v-form @submit.prevent="saveModel">
       <v-card>
         <v-card-title class="text-h5 grey lighten-2">
-          Add Sub Category for {{ categoryTitle }}
+          Add Product for {{ subCategoryTitle }}
         </v-card-title>
 
         <v-card-text class="tw-mt-4">
@@ -30,8 +30,8 @@
 
 <script>
 export default {
-  name: "SubCategoryCreate",
-  props: ['position', 'categoryId', 'value', 'categoryTitle'],
+  name: "ProductCreate",
+  props: ['position', 'subCategoryId', 'value', 'subCategoryTitle'],
   data() {
     return {
       dialog: this.value,
@@ -56,9 +56,9 @@ export default {
       this.$refs.validator.validate().then(valid => {
         if (valid) {
           this.saving = true
-          this.$axios.post("/backend/api/subCategories", {
+          this.$axios.post("/backend/api/products", {
             position: this.position,
-            category_id: this.categoryId,
+            sub_category_id: this.subCategoryId,
             vendor_id: this.$auth.user.id,
             ...this.model
           }).then(resp => {
