@@ -48,7 +48,6 @@ export default {
       }
     },
     dialog: function (newVal) {
-      console.log('emit')
       this.$emit('input', newVal)
     }
   },
