@@ -53,6 +53,7 @@
                    @end="drag=false"
                    ghost-class="ghost">
           <Product :product="product" v-for="(product, index) in subCategory.products"
+                   :sub-category="subCategory"
                    v-on="$listeners"
                    :key="index"/>
         </Draggable>

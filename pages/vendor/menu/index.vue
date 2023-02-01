@@ -11,9 +11,11 @@
                            :category-title="subCategoryModel.categoryTitle"
                            :position="subCategoryModel.position"/>
 
-        <ProductCreate @created="fetch" v-model="productModel.dialog" :sub-category-id="productModel.subCategoryId"
-                       :sub-category-title="productModel.subCategoryTitle"
-                       :position="productModel.position"/>
+        <ProductCreateEdit @created="fetch" @edited="fetch" v-model="productModel.dialog"
+                           :sub-category-id="productModel.subCategoryId"
+                           :id="productModel.id"
+                           :sub-category-title="productModel.subCategoryTitle"
+                           :position="productModel.position"/>
 
         <v-select single-line outlined label="Search.."
                   dense hide-details
@@ -34,6 +36,7 @@
                     ref="categories"
                     :category="category"
                     @createProduct="createProduct"
+                    @editProduct="editProduct"
                     v-for="(category, index) in menu" :key="index"/>
         </Draggable>
       </div>
@@ -48,12 +51,13 @@ import Category from "../../../components/menu/Category.vue";
 import draggable from "vuedraggable";
 import CategoryCreate from "../../../components/menu/CategoryCreate.vue";
 import SubCategoryCreate from "../../../components/menu/SubCategoryCreate.vue";
-import ProductCreate from "../../../components/menu/ProductCreate.vue";
+import ProductCreate from "../../../components/menu/ProductCreateEdit.vue";
+import ProductCreateEdit from "../../../components/menu/ProductCreateEdit.vue";
 
 
 export default {
   name: "IndexPage",
-  components: {ProductCreate, SubCategoryCreate, CategoryCreate, Category, Draggable: draggable},
+  components: {ProductCreateEdit, ProductCreate, SubCategoryCreate, CategoryCreate, Category, Draggable: draggable},
   middleware: 'auth',
 
   data() {
@@ -123,7 +127,12 @@ export default {
       this.productModel = {
         ...event, dialog: true
       }
-    }
+    },
+    editProduct(event) {
+      this.productModel = {
+        ...event, dialog: true
+      }
+    },
   }
 }
 </script>
