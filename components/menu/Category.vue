@@ -128,10 +128,6 @@ export default {
         this.$axios.delete("/backend/api/categories/" + this.category.id)
           .then(resp => {
             this.$emit('edited')
-            this.$root.$emit("toast", {
-              text: "Deleted successfully",
-              type: "success",
-            })
           }).catch(err => {
           this.$root.$emit("toast", {
             text: "Couldn't delete",
