@@ -28,7 +28,9 @@
                  color="primary" @click="showEdit">Edit
           </v-btn>
           <v-btn text x-small @mouseenter.native @mouseleave.native
-                 color="primary">Add New Sub category
+                 color="primary"
+                 @click="$emit('createSubCategory',{categoryId: category.id, position:category.subCategories.length, categoryTitle: category.title})">
+            Add New Sub category
           </v-btn>
           <v-btn text x-small @mouseenter.native @mouseleave.native
                  color="error" @click="remove">Delete

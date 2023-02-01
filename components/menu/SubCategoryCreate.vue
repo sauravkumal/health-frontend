@@ -3,16 +3,10 @@
     v-model="dialog"
     width="700"
   >
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn color="primary" outlined v-bind="attrs" v-on="on">
-        Add Category
-      </v-btn>
-    </template>
-
     <v-form @submit.prevent="saveModel">
       <v-card>
         <v-card-title class="text-h5 grey lighten-2">
-          Create Category
+          Add Sub Category for {{ categoryTitle }}
         </v-card-title>
 
         <v-card-text class="tw-mt-4">
@@ -36,15 +30,26 @@
 
 <script>
 export default {
-  name: "CategoryCreate",
-  props: ['position'],
+  name: "SubCategoryCreate",
+  props: ['position', 'categoryId', 'value', 'categoryTitle'],
   data() {
     return {
-      dialog: false,
+      dialog: this.value,
       model: {
         title: ''
       },
       saving: false
+    }
+  },
+  watch: {
+    value: function (newVal) {
+      if (newVal !== this.dialog) {
+        this.dialog = newVal
+      }
+    },
+    dialog: function (newVal) {
+      console.log('emit')
+      this.$emit('input', newVal)
     }
   },
   methods: {
@@ -52,8 +57,9 @@ export default {
       this.$refs.validator.validate().then(valid => {
         if (valid) {
           this.saving = true
-          this.$axios.post("/backend/api/categories", {
+          this.$axios.post("/backend/api/subCategories", {
             position: this.position,
+            category_id: this.categoryId,
             vendor_id: this.$auth.user.id,
             ...this.model
           }).then(resp => {
