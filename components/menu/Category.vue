@@ -13,6 +13,12 @@
               ></v-text-field>
             </ValidationProvider>
           </ValidationObserver>
+          <v-btn color="success" icon :loading="saving" @click="saveModel">
+            <v-icon>mdi-check</v-icon>
+          </v-btn>
+          <v-btn color="error" icon @click="edit=false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
         </template>
         <span v-else class="tw-ml-4">{{ category.title }}</span>
         <template v-if="showActions && !edit">
@@ -53,7 +59,8 @@ export default {
       showActions: false,
       drag: false,
       edit: false,
-      model: null
+      model: null,
+      saving: false
     }
   },
   watch: {
@@ -81,6 +88,41 @@ export default {
             type: "error",
           })
         })
+    },
+
+    saveModel() {
+      if (this.model.id) {
+        this.saving = true
+        this.$axios.put("/backend/api/categories/" + this.model.id, {
+          position: this.$vnode.key,
+          ...this.model
+        }).then(resp => {
+          this.saving = false
+          this.edit = false
+        })
+          .catch(error => {
+            this.saving = false
+            this.$root.$emit("toast", {
+              text: "Couldn't save",
+              type: "error",
+            })
+          })
+      } else {
+        this.$axios.post("/backend/api/categories", {
+          position: this.$vnode.key,
+          ...this.model
+        }).then(resp => {
+          this.saving = false
+          this.edit = false
+        })
+          .catch(error => {
+            this.saving = false
+            this.$root.$emit("toast", {
+              text: "Couldn't save",
+              type: "error",
+            })
+          })
+      }
     }
   }
 }
