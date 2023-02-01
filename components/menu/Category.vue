@@ -5,20 +5,22 @@
       <td class="tw-flex tw-space-x-4 tw-text-lg tw-pb-2 tw-items-center">
         <v-avatar size="25" color="primary" class="tw-text-white">{{ $vnode.key + 1 }}</v-avatar>
         <template v-if="edit">
-          <ValidationObserver ref="validator">
-            <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
-              <v-text-field v-model="model.title" dense single-line label="Title" hide-details="auto"
-                            outlined
-                            :error-messages="errors"
-              ></v-text-field>
-            </ValidationProvider>
-          </ValidationObserver>
-          <v-btn color="success" icon :loading="saving" @click="saveModel">
-            <v-icon>mdi-check</v-icon>
-          </v-btn>
-          <v-btn color="error" icon @click="edit=false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
+          <v-form @submit.prevent="saveModel" class="tw-flex tw-space-x-2">
+            <ValidationObserver ref="validator">
+              <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
+                <v-text-field v-model="model.title" dense single-line label="Title" hide-details="auto"
+                              outlined
+                              :error-messages="errors"
+                ></v-text-field>
+              </ValidationProvider>
+            </ValidationObserver>
+            <v-btn type="submit" color="success" icon :loading="saving">
+              <v-icon>mdi-check</v-icon>
+            </v-btn>
+            <v-btn color="error" icon @click="edit=false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-form>
         </template>
         <span v-else class="tw-ml-4">{{ category.title }}</span>
         <template v-if="showActions && !edit">
@@ -96,38 +98,21 @@ export default {
     saveModel() {
       this.$refs.validator.validate().then(valid => {
         if (valid) {
-          if (this.model.id) {
-            this.saving = true
-            this.$axios.put("/backend/api/categories/" + this.model.id, {
-              position: this.$vnode.key,
-              ...this.model
-            }).then(resp => {
+          this.saving = true
+          this.$axios.put("/backend/api/categories/" + this.model.id, {
+            position: this.$vnode.key,
+            ...this.model
+          }).then(resp => {
+            this.saving = false
+            this.edit = false
+          })
+            .catch(error => {
               this.saving = false
-              this.edit = false
-            })
-              .catch(error => {
-                this.saving = false
-                this.$root.$emit("toast", {
-                  text: "Couldn't save",
-                  type: "error",
-                })
+              this.$root.$emit("toast", {
+                text: "Couldn't save",
+                type: "error",
               })
-          } else {
-            this.$axios.post("/backend/api/categories", {
-              position: this.$vnode.key,
-              ...this.model
-            }).then(resp => {
-              this.saving = false
-              this.edit = false
             })
-              .catch(error => {
-                this.saving = false
-                this.$root.$emit("toast", {
-                  text: "Couldn't save",
-                  type: "error",
-                })
-              })
-          }
         }
       })
     },

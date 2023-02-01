@@ -11,7 +11,7 @@
 
     <v-card>
       <v-card-title class="text-h5 grey lighten-2">
-        Privacy Policy
+        Create Category
       </v-card-title>
 
       <v-card-text>
@@ -38,7 +38,29 @@ export default {
   props: ['position'],
   data() {
     return {
-      dialog: false
+      dialog: false,
+      model: {
+        title: ''
+      }
+    }
+  },
+  methods: {
+    saveModel() {
+      this.$axios.post("/backend/api/categories", {
+        position: this.position,
+        vendor_id: this.$auth.user.id,
+        ...this.model
+      }).then(resp => {
+        this.saving = false
+        this.edit = false
+      })
+        .catch(error => {
+          this.saving = false
+          this.$root.$emit("toast", {
+            text: "Couldn't save",
+            type: "error",
+          })
+        })
     }
   }
 }
