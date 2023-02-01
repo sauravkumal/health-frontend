@@ -28,6 +28,9 @@
           <v-btn text x-small @mouseenter.native @mouseleave.native
                  color="primary">Add New Sub category
           </v-btn>
+          <v-btn text x-small @mouseenter.native @mouseleave.native
+                 color="error" @click="remove">Delete
+          </v-btn>
         </template>
       </td>
     </tr>
@@ -91,37 +94,57 @@ export default {
     },
 
     saveModel() {
-      if (this.model.id) {
-        this.saving = true
-        this.$axios.put("/backend/api/categories/" + this.model.id, {
-          position: this.$vnode.key,
-          ...this.model
-        }).then(resp => {
-          this.saving = false
-          this.edit = false
-        })
-          .catch(error => {
-            this.saving = false
-            this.$root.$emit("toast", {
-              text: "Couldn't save",
-              type: "error",
+      this.$refs.validator.validate().then(valid => {
+        if (valid) {
+          if (this.model.id) {
+            this.saving = true
+            this.$axios.put("/backend/api/categories/" + this.model.id, {
+              position: this.$vnode.key,
+              ...this.model
+            }).then(resp => {
+              this.saving = false
+              this.edit = false
             })
-          })
-      } else {
-        this.$axios.post("/backend/api/categories", {
-          position: this.$vnode.key,
-          ...this.model
-        }).then(resp => {
-          this.saving = false
-          this.edit = false
-        })
-          .catch(error => {
-            this.saving = false
-            this.$root.$emit("toast", {
-              text: "Couldn't save",
-              type: "error",
+              .catch(error => {
+                this.saving = false
+                this.$root.$emit("toast", {
+                  text: "Couldn't save",
+                  type: "error",
+                })
+              })
+          } else {
+            this.$axios.post("/backend/api/categories", {
+              position: this.$vnode.key,
+              ...this.model
+            }).then(resp => {
+              this.saving = false
+              this.edit = false
             })
+              .catch(error => {
+                this.saving = false
+                this.$root.$emit("toast", {
+                  text: "Couldn't save",
+                  type: "error",
+                })
+              })
+          }
+        }
+      })
+    },
+    remove() {
+      if (window.confirm('Are you sure you want to delete? This action cannot be undone.')) {
+        this.$axios.delete("/backend/api/categories/" + this.category.id)
+          .then(resp => {
+            this.$root.$emit("toast", {
+              text: "Deleted successfully",
+              type: "success",
+            })
+          }).catch(err => {
+          this.$root.$emit("toast", {
+            text: "Couldn't delete",
+            type: "error",
           })
+        })
       }
     }
   }
