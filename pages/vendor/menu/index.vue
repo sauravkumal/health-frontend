@@ -3,15 +3,20 @@
     <v-card-title class="tw-justify-between">
       <div>Menu</div>
       <div>
-        <v-text-field single-line outlined label="Search.."
-                      dense hide-details
-                      append-icon="mdi-magnify"></v-text-field>
+        <v-select single-line outlined label="Search.."
+                  dense hide-details
+                  :items="menu"
+                  item-text="title"
+                  item-value="id"
+                  v-model="search"
+                  clearable
+                  prepend-inner-icon="mdi-magnify"></v-select>
       </div>
     </v-card-title>
     <v-card-text>
       <Draggable class="tw-flex tw-flex-col tw-space-y-4" v-model="menu" @start="drag=true" @end="drag=false"
                  ghost-class="ghost">
-        <Category :category="category" v-for="(category, index) in menu" :key="index"/>
+        <Category ref="categories" :id="index" :category="category" v-for="(category, index) in menu" :key="index"/>
       </Draggable>
     </v-card-text>
     <v-card-actions></v-card-actions>
@@ -33,6 +38,16 @@ export default {
     return {
       drag: false,
       menu: [],
+      search: null
+    }
+  },
+
+  watch: {
+    search: function (newVal) {
+      const ref = this.$refs.categories.find(cat => cat.category.id === newVal)
+      if (ref) {
+        this.$vuetify.goTo(ref)
+      }
     }
   },
 
