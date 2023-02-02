@@ -100,7 +100,7 @@ export default {
           } else {
             this.$axios.post("/backend/api/products", {
               position: this.position,
-              sub_category_id: this.subCategoryId,
+              category_id: this.categoryId,
               vendor_id: this.$auth.user.id,
               ...this.model
             }).then(resp => {

@@ -74,6 +74,16 @@ export default {
         this.$vuetify.goTo(ref)
       }
     },
+    'productModel.dialog': function (newVal) {
+      if (!newVal) {
+        this.productModel = {
+          categoryId: null,
+          position: null,
+          dialog: false,
+          categoryTitle: null
+        }
+      }
+    },
     publishMenu: function (newVal) {
       this.updatePublishMenu()
     }
