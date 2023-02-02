@@ -49,6 +49,7 @@
           <Product :key="index"
                    v-on="$listeners"
                    :product="product"
+                   :category="category"
                    v-for="(product, index) in category.products"/>
         </Draggable>
       </td>

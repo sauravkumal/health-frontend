@@ -7,8 +7,9 @@
       </div>
       <div class="tw-flex tw-space-x-2 tw-items-end">
         <CategoryCreate @created="fetch" :position="menu.length"></CategoryCreate>
-        <ProductCreate @created="fetch" v-model="productModel.dialog" :category-id="productModel.categoryId"
+        <ProductCreateEdit @created="fetch" v-model="productModel.dialog" :category-id="productModel.categoryId"
                            :category-title="productModel.categoryTitle"
+                           :id="productModel.id"
                            :position="productModel.position"/>
 
         <v-select single-line outlined label="Search.."
@@ -27,6 +28,7 @@
                    ghost-class="ghost">
           <Category @edited="fetch"
                     @createProduct="createProduct"
+                    @editProduct="editProduct"
                     ref="categories"
                     :category="category"
                     v-for="(category, index) in menu" :key="index"/>
@@ -42,12 +44,12 @@
 import Category from "../../../components/menu/Category.vue";
 import draggable from "vuedraggable";
 import CategoryCreate from "../../../components/menu/CategoryCreate.vue";
-import ProductCreate from "../../../components/menu/ProductCreate.vue";
+import ProductCreateEdit from "../../../components/menu/ProductCreateEdit.vue";
 
 
 export default {
   name: "IndexPage",
-  components: {ProductCreate, CategoryCreate, Category, Draggable: draggable},
+  components: {ProductCreateEdit, CategoryCreate, Category, Draggable: draggable},
   middleware: 'auth',
 
   data() {
@@ -103,6 +105,11 @@ export default {
     },
 
     createProduct(event) {
+      this.productModel = {
+        ...event, dialog: true
+      }
+    },
+    editProduct(event) {
       this.productModel = {
         ...event, dialog: true
       }
