@@ -10,17 +10,20 @@
         </v-card-title>
 
         <v-card-text class="tw-mt-4">
-          <ValidationObserver ref="validator">
+          <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-space-y-2">
             <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
               <v-text-field v-model="model.title" dense single-line label="Title" hide-details="auto"
                             outlined
                             :error-messages="errors"
               ></v-text-field>
             </ValidationProvider>
-            <div>
-              <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
-                            v-model="model.image" label="Image"></v-file-input>
-              <ImageViewer :image="model.image" :url="model.image_url"></ImageViewer>
+            <div class="tw-flex tw-space-x-2">
+              <div class="tw-flex tw-flex-col tw-space-y-2">
+                <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
+                              v-model="model.image" label="Image"></v-file-input>
+                <ImageViewer :image="model.image" :url="model.image_url"></ImageViewer>
+              </div>
+              <div>sdfsddf</div>
             </div>
           </ValidationObserver>
         </v-card-text>
@@ -76,6 +79,9 @@ export default {
     },
     dialog: function (newVal) {
       this.$emit('input', newVal)
+      if (!newVal) {
+        this.model = JSON.parse(JSON.stringify(this.defaultModel))
+      }
     }
   },
   methods: {

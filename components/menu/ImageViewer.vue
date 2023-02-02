@@ -1,5 +1,6 @@
 <template>
-  <v-img :width="300" contain :src="imageUrl"/>
+  <v-img :width="300"
+         contain :src="imageUrl"/>
 </template>
 
 <script>
