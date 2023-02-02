@@ -42,13 +42,14 @@
     <tbody>
     <tr>
       <td class="tw-border tw-border-solid tw-border-gray-200 tw-p-4 tw-bg-gray-50">
-        <Draggable class="tw-flex tw-flex-wrap tw-gap-x-2 tw-gap-y-2" v-model="category.subCategories"
+        <Draggable class="tw-flex tw-flex-wrap tw-gap-x-2 tw-gap-y-2" v-model="category.products"
                    @start="drag=true"
                    @end="drag=false"
                    ghost-class="ghost">
-          <SubCategory :key="index" :sub-category="subCategory"
-                       v-on="$listeners"
-                       v-for="(subCategory, index) in category.subCategories"/>
+          <Product :key="index" :category="category"
+                   v-on="$listeners"
+                   :product="product"
+                   v-for="(product, index) in category.products"/>
         </Draggable>
       </td>
     </tr>
@@ -57,12 +58,12 @@
 </template>
 
 <script>
-import SubCategory from "./SubCategory.vue";
+import Product from "./Product.vue";
 import draggable from "vuedraggable";
 
 export default {
   name: "Category",
-  components: {SubCategory, Draggable: draggable},
+  components: {Product, Draggable: draggable},
   props: ['category'],
   data() {
     return {
