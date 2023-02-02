@@ -31,14 +31,6 @@
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
           <v-btn icon x-small @mouseenter.native @mouseleave.native
-                 color="primary"
-                 @click="$emit('createProduct',{productId: product.id,
-                  position:category.products.length,
-                   categoryTitle: category.title
-                 })">
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
-          <v-btn icon x-small @mouseenter.native @mouseleave.native
                  color="error" @click="remove">
             <v-icon>mdi-delete</v-icon>
           </v-btn>
@@ -60,7 +52,7 @@ import draggable from "vuedraggable";
 export default {
   name: "Product",
   components: {Draggable: draggable},
-  props: ['product', 'category'],
+  props: ['product'],
   data() {
     return {
       drag: false,

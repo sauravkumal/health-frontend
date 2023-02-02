@@ -29,8 +29,8 @@
           </v-btn>
           <v-btn text x-small @mouseenter.native @mouseleave.native
                  color="primary"
-                 @click="$emit('createSubCategory',{categoryId: category.id, position:category.subCategories.length, categoryTitle: category.title})">
-            Add New Sub category
+                 @click="$emit('createProduct',{categoryId: category.id, position:category.products.length, categoryTitle: category.title})">
+            Add New Product
           </v-btn>
           <v-btn text x-small @mouseenter.native @mouseleave.native
                  color="error" @click="remove">Delete
@@ -46,7 +46,7 @@
                    @start="drag=true"
                    @end="drag=false"
                    ghost-class="ghost">
-          <Product :key="index" :category="category"
+          <Product :key="index"
                    v-on="$listeners"
                    :product="product"
                    v-for="(product, index) in category.products"/>

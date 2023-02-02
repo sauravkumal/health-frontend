@@ -7,9 +7,9 @@
       </div>
       <div class="tw-flex tw-space-x-2 tw-items-end">
         <CategoryCreate @created="fetch" :position="menu.length"></CategoryCreate>
-        <SubCategoryCreate @created="fetch" v-model="subCategoryModel.dialog" :category-id="subCategoryModel.categoryId"
-                           :category-title="subCategoryModel.categoryTitle"
-                           :position="subCategoryModel.position"/>
+        <ProductCreate @created="fetch" v-model="productModel.dialog" :category-id="productModel.categoryId"
+                           :category-title="productModel.categoryTitle"
+                           :position="productModel.position"/>
 
         <v-select single-line outlined label="Search.."
                   dense hide-details
@@ -26,7 +26,7 @@
         <Draggable class="tw-flex tw-flex-col tw-space-y-4" v-model="menu" @start="drag=true" @end="drag=false"
                    ghost-class="ghost">
           <Category @edited="fetch"
-                    @createSubCategory="createSubCategory"
+                    @createProduct="createProduct"
                     ref="categories"
                     :category="category"
                     v-for="(category, index) in menu" :key="index"/>
@@ -42,12 +42,12 @@
 import Category from "../../../components/menu/Category.vue";
 import draggable from "vuedraggable";
 import CategoryCreate from "../../../components/menu/CategoryCreate.vue";
-import SubCategoryCreate from "../../../components/menu/ProductCreate.vue";
+import ProductCreate from "../../../components/menu/ProductCreate.vue";
 
 
 export default {
   name: "IndexPage",
-  components: {SubCategoryCreate, CategoryCreate, Category, Draggable: draggable},
+  components: {ProductCreate, CategoryCreate, Category, Draggable: draggable},
   middleware: 'auth',
 
   data() {
@@ -56,7 +56,7 @@ export default {
       publishMenu: this.$auth.user.publish_menu,
       menu: [],
       search: null,
-      subCategoryModel: {
+      productModel: {
         categoryId: null,
         position: null,
         dialog: false,
@@ -102,8 +102,8 @@ export default {
 
     },
 
-    createSubCategory(event) {
-      this.subCategoryModel = {
+    createProduct(event) {
+      this.productModel = {
         ...event, dialog: true
       }
     },
