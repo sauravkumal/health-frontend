@@ -21,7 +21,7 @@
               <div class="tw-flex tw-flex-col tw-space-y-2">
                 <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
                               v-model="model.image" label="Image"></v-file-input>
-                <ImageViewer :image="model.image" :url="model.image_url"></ImageViewer>
+                <ImageViewer :image="model.image" :url="model.thumb_image_url"></ImageViewer>
               </div>
               <div>sdfsddf</div>
             </div>
