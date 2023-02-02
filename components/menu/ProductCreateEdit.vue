@@ -17,6 +17,10 @@
                             :error-messages="errors"
               ></v-text-field>
             </ValidationProvider>
+            <div>
+              <v-file-input v-model="model.image" label="Image"></v-file-input>
+              <ImageViewer :image="model.image" :url="model.image_url"></ImageViewer>
+            </div>
           </ValidationObserver>
         </v-card-text>
         <v-card-actions>
@@ -29,14 +33,23 @@
 </template>
 
 <script>
+import {buildFormData} from "../../utils/helpers";
+import ImageViewer from "./ImageViewer.vue";
+
 export default {
   name: "ProductCreateEdit",
+  components: {ImageViewer},
   props: ['position', 'categoryId', 'value', 'categoryTitle', 'id'],
   data() {
     return {
       dialog: this.value,
       model: {
-        title: ''
+        title: '',
+        image: undefined
+      },
+      defaultModel: {
+        title: '',
+        image: undefined
       },
       saving: false
     }
@@ -75,16 +88,19 @@ export default {
       this.$refs.validator.validate().then(valid => {
         if (valid) {
           this.saving = true
-          if (this.id) {
-            this.$axios.put("/backend/api/products/" + this.id, {
+          const params =
+            {
               position: this.position,
               category_id: this.categoryId,
               vendor_id: this.$auth.user.id,
               ...this.model
-            }).then(resp => {
-              this.model = {
-                title: ''
-              }
+            }
+          const formData = new FormData()
+          buildFormData(formData, params)
+          if (this.id) {
+            formData.append('_method', 'PUT')
+            this.$axios.post("/backend/api/products/" + this.id, formData).then(resp => {
+              this.model = JSON.parse(JSON.stringify(this.defaultModel))
               this.$refs.validator.reset()
               this.saving = false
               this.dialog = false
@@ -98,15 +114,8 @@ export default {
                 })
               })
           } else {
-            this.$axios.post("/backend/api/products", {
-              position: this.position,
-              category_id: this.categoryId,
-              vendor_id: this.$auth.user.id,
-              ...this.model
-            }).then(resp => {
-              this.model = {
-                title: ''
-              }
+            this.$axios.post("/backend/api/products", formData).then(resp => {
+              this.model = JSON.parse(JSON.stringify(this.defaultModel))
               this.$refs.validator.reset()
               this.saving = false
               this.dialog = false

@@ -97,7 +97,7 @@
       dense
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
-      <v-toolbar-title>Dashboard
+      <v-toolbar-title>{{ $auth.user.name }}
       </v-toolbar-title>
       <v-spacer/>
 
