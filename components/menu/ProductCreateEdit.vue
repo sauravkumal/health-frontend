@@ -18,7 +18,8 @@
               ></v-text-field>
             </ValidationProvider>
             <div>
-              <v-file-input v-model="model.image" label="Image"></v-file-input>
+              <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
+                            v-model="model.image" label="Image"></v-file-input>
               <ImageViewer :image="model.image" :url="model.image_url"></ImageViewer>
             </div>
           </ValidationObserver>
