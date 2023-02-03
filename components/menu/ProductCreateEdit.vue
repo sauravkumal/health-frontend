@@ -12,7 +12,7 @@
         <v-card-text class="tw-mt-4">
           <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-space-y-2">
             <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
-              <v-text-field v-model="model.title" dense single-line label="Title" hide-details="auto"
+              <v-text-field v-model="model.title" dense label="Title" hide-details="auto"
                             outlined
                             :error-messages="errors"
               ></v-text-field>
@@ -23,7 +23,20 @@
                               v-model="model.image" label="Image"></v-file-input>
                 <ImageViewer :image="model.image" :url="model.thumb_image_url"></ImageViewer>
               </div>
-              <div>sdfsddf</div>
+              <div class="tw-grow">
+                <ValidationProvider name="Pricing Types" vid="pricing_types" rules="required" v-slot="{errors}">
+                  <v-select label="Pricing Type" dense outlined hide-details="auto"
+                            chips
+                            clearable
+                            :items="pricingUnits()"
+                            item-text="title"
+                            item-value="value"
+                            multiple
+                            deletable-chips
+                            small-chips
+                            v-model="model.pricing_types" :error-messages="errors"></v-select>
+                </ValidationProvider>
+              </div>
             </div>
           </ValidationObserver>
         </v-card-text>
@@ -39,6 +52,7 @@
 <script>
 import {buildFormData} from "../../utils/helpers";
 import ImageViewer from "./ImageViewer.vue";
+import {pricingUnits} from "../../utils/constants";
 
 export default {
   name: "ProductCreateEdit",
@@ -49,10 +63,12 @@ export default {
       dialog: this.value,
       model: {
         title: '',
+        pricing_types: [],
         image: undefined
       },
       defaultModel: {
         title: '',
+        pricing_types: [],
         image: undefined
       },
       saving: false
@@ -85,6 +101,9 @@ export default {
     }
   },
   methods: {
+    pricingUnits() {
+      return pricingUnits
+    },
     fetchModel() {
       this.$axios.get("/backend/api/products/" + this.id)
         .then(resp => {
