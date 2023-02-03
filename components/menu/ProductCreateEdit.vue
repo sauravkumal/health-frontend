@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     v-model="dialog"
-    width="700"
+    width="800"
   >
     <v-form @submit.prevent="saveModel">
       <v-card>
@@ -39,27 +39,33 @@
 
                 <div class="tw-flex tw-flex-col tw-space-y-3" v-for="(detail, index) in model.pricing_details">
                   <div>
-                    <div>Per {{ pricingUnitsByKey[detail.type] }} Pricing</div>
+                    <div class="tw-my-2">Per <span class="tw-font-semibold">{{ pricingUnitsByKey[detail.type] }}</span>
+                      Pricing
+                    </div>
                     <div class="tw-flex tw-space-x-3">
                       <ValidationProvider name="Current Price" :vid="'current_price'+index.toString()" rules="required"
                                           v-slot="{errors}">
                         <v-text-field v-model="model.pricing_details[index].price" dense label="Current Price"
                                       hide-details="auto"
                                       outlined
+                                      prefix="Rs"
                                       type="number"
                                       :error-messages="errors"
                         ></v-text-field>
                       </ValidationProvider>
-                      <ValidationProvider name="Previous Price" :vid="'previous_price'+index.toString()"
-                                          rules="required"
-                                          v-slot="{errors}">
-                        <v-text-field v-model="model.pricing_details[index].previousPrice" dense label="Previous Price"
-                                      hide-details="auto"
-                                      outlined
-                                      type="number"
-                                      :error-messages="errors"
-                        ></v-text-field>
-                      </ValidationProvider>
+                      <v-text-field v-model="model.pricing_details[index].previousPrice" dense label="Previous Price"
+                                    hide-details="auto"
+                                    outlined
+                                    prefix="Rs"
+                                    type="number"
+                      ></v-text-field>
+
+                      <v-text-field v-model="model.pricing_details[index].credits" dense label="Credits"
+                                    hide-details="auto"
+                                    outlined
+                                    prefix="Rs"
+                                    type="number"
+                      ></v-text-field>
                     </div>
                   </div>
                 </div>
@@ -121,12 +127,15 @@ export default {
 
         if (addedItems.length) {
           addedItems.forEach(item => {
-            temp.push({
-              type: item,
-              price: null,
-              previousPrice: null,
-              credits: null
-            })
+            const existing = temp.find(detail => detail.type === item)
+            if (!existing) {
+              temp.push({
+                type: item,
+                price: null,
+                previousPrice: null,
+                credits: null
+              })
+            }
           })
         }
 

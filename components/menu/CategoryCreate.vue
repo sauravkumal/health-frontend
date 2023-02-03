@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     v-model="dialog"
-    width="700"
+    width="800"
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn color="primary" outlined v-bind="attrs" v-on="on">
