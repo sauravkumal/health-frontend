@@ -33,13 +33,15 @@
                  :src="product.thumb_image_url"
                  width="100"></v-img>
           <div class="tw-col-span-5">
-            <div class="tw-flex tw-flex-col" v-for="(detail, index) in product.pricing_details">
+            <div
+              class="tw-flex tw-flex-col tw-border last:tw-border-0 tw-border-x-0 tw-border-t-0 tw-border-solid tw-border-gray-300"
+              v-for="(detail, index) in product.pricing_details">
               <div class="tw-flex tw-justify-between tw-items-baseline">
                 <div>Per {{ pricingUnitsByKey[detail.type] }}:</div>
-                <div class="tw-text-xl tw-text-orange-500">Rs {{ currency(detail.price) }}</div>
+                <div class="tw-text-2xl tw-text-orange-500">Rs {{ currency(detail.price) }}</div>
               </div>
               <div v-if="detail.previousPrice"
-                   class="tw-text-gray-400 tw-text-xs"><span class="tw-line-through">Rs {{
+                   class="tw-text-gray-400 tw-text-xs tw-text-end"><span class="tw-line-through">Rs {{
                   detail.previousPrice
                 }}</span>
                 <span class="tw-text-gray-800">{{ discountPercent(detail).toFixed(2) }}%</span>
