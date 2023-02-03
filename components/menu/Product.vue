@@ -27,7 +27,27 @@
     </thead>
     <tbody>
     <tr>
-      <td>details</td>
+      <td class="tw-p-1">
+        <div class="tw-flex tw-space-x-2">
+          <v-img class="tw-border tw-border-solid tw-border-gray-300" :src="product.thumb_image_url"
+                 width="100"></v-img>
+          <div>
+            <div class="tw-font-semibold">Pricing Details</div>
+            <div class="tw-flex tw-flex-col" v-for="(detail, index) in product.pricing_details">
+              <div><span class="tw-font-semibold">Per {{ pricingUnitsByKey[detail.type] }} pricing:</span>
+                <span v-if="detail.previousPrice"
+                      class="tw-line-through tw-text-gray-400">Rs {{ detail.previousPrice }}</span>
+                <span>Rs {{ detail.price }}</span></div>
+
+              <div v-if="detail.credits"><span class="tw-font-semibold">Credits:</span> <span>Rs {{
+                  detail.credits
+                }}</span></div>
+            </div>
+          </div>
+          <div>
+          </div>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -35,9 +55,15 @@
 
 <script>
 import draggable from "vuedraggable";
+import {pricingUnitsByKey} from "../../utils/constants";
 
 export default {
   name: "Product",
+  computed: {
+    pricingUnitsByKey() {
+      return pricingUnitsByKey
+    }
+  },
   components: {Draggable: draggable},
   props: ['product', 'category'],
   data() {
