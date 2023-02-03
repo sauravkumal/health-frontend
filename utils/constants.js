@@ -7,6 +7,5 @@ export const pricingUnits = [
 export const pricingUnitsByKey = {
   half: 'Half',
   plate: 'Plate',
-  stick: 'Stick',
   piece: 'Piece'
 }

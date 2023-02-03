@@ -28,23 +28,31 @@
     <tbody>
     <tr>
       <td class="tw-p-1">
-        <div class="tw-flex tw-space-x-2">
-          <v-img class="tw-border tw-border-solid tw-border-gray-300" :src="product.thumb_image_url"
+        <div class="tw-grid tw-grid-cols-8 tw-gap-x-2">
+          <v-img v-if="product.thumb_image_url" class="tw-col-span-3 tw-border tw-border-solid tw-border-gray-300"
+                 :src="product.thumb_image_url"
                  width="100"></v-img>
-          <div>
-            <div class="tw-font-semibold">Pricing Details</div>
+          <div class="tw-col-span-5">
             <div class="tw-flex tw-flex-col" v-for="(detail, index) in product.pricing_details">
-              <div><span class="tw-font-semibold">Per {{ pricingUnitsByKey[detail.type] }} pricing:</span>
-                <span v-if="detail.previousPrice"
-                      class="tw-line-through tw-text-gray-400">Rs {{ detail.previousPrice }}</span>
-                <span>Rs {{ detail.price }}</span></div>
+              <div class="tw-flex tw-justify-between tw-items-baseline">
+                <div>Per {{ pricingUnitsByKey[detail.type] }}:</div>
+                <div class="tw-text-xl tw-text-orange-500">Rs {{ currency(detail.price) }}</div>
+              </div>
+              <div v-if="detail.previousPrice"
+                   class="tw-text-gray-400 tw-text-xs"><span class="tw-line-through">Rs {{
+                  detail.previousPrice
+                }}</span>
+                <span class="tw-text-gray-800">{{ discountPercent(detail).toFixed(2) }}%</span>
+              </div>
 
-              <div v-if="detail.credits"><span class="tw-font-semibold">Credits:</span> <span>Rs {{
-                  detail.credits
-                }}</span></div>
+              <div v-if="detail.credits" class="tw-flex tw-justify-between tw-items-baseline">
+                <div>Credits:</div>
+                <div class="tw-text-orange-500">Rs {{
+                    detail.credits
+                  }}
+                </div>
+              </div>
             </div>
-          </div>
-          <div>
           </div>
         </div>
       </td>
@@ -56,6 +64,7 @@
 <script>
 import draggable from "vuedraggable";
 import {pricingUnitsByKey} from "../../utils/constants";
+import {currency} from "../../utils/helpers";
 
 export default {
   name: "Product",
@@ -84,6 +93,10 @@ export default {
     }
   },
   methods: {
+    currency,
+    discountPercent(detail) {
+      return -(detail.previousPrice - detail.price) / detail.previousPrice * 100
+    },
     updatePosition() {
       this.$axios.put("/backend/api/products/" + this.product.id, {
         position: this.$vnode.key
