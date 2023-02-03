@@ -53,6 +53,7 @@
 import {buildFormData} from "../../utils/helpers";
 import ImageViewer from "./ImageViewer.vue";
 import {pricingUnits} from "../../utils/constants";
+import {difference} from 'lodash'
 
 export default {
   name: "ProductCreateEdit",
@@ -64,11 +65,13 @@ export default {
       model: {
         title: '',
         pricing_types: [],
+        pricing_details: [],
         image: undefined
       },
       defaultModel: {
         title: '',
         pricing_types: [],
+        pricing_details: [],
         image: undefined
       },
       saving: false
@@ -80,6 +83,33 @@ export default {
     }
   },
   watch: {
+    'model.pricing_types': {
+      handler: function (newVal, oldVal) {
+        const addedItems = difference(newVal, oldVal)
+        const removedItems = difference(oldVal, newVal)
+        const temp = this.model.pricing_details || []
+
+        if (addedItems.length) {
+          addedItems.forEach(item => {
+            temp.push({
+              type: item,
+              price: null,
+              previousPrice: null,
+              credits: null
+            })
+          })
+        }
+
+        if (removedItems.length) {
+          removedItems.forEach(item => {
+            const index = temp.indexOf(detail => detail.type === item)
+            temp.splice(index, 1)
+          })
+        }
+
+        this.model.pricing_details = temp
+      }
+    },
     id: {
       handler: function (newVal) {
         if (newVal) {
