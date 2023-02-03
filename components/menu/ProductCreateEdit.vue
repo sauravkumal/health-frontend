@@ -10,15 +10,15 @@
         </v-card-title>
 
         <v-card-text class="tw-mt-4">
-          <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-space-y-2">
+          <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-space-y-3">
             <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
               <v-text-field v-model="model.title" dense label="Title" hide-details="auto"
                             outlined
                             :error-messages="errors"
               ></v-text-field>
             </ValidationProvider>
-            <div class="tw-flex tw-space-x-2">
-              <div class="tw-flex tw-flex-col tw-space-y-2">
+            <div class="tw-flex tw-space-x-3">
+              <div class="tw-flex tw-flex-col tw-space-y-3">
                 <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
                               v-model="model.image" label="Image"></v-file-input>
                 <ImageViewer :image="model.image" :url="model.thumb_image_url"></ImageViewer>
@@ -36,6 +36,33 @@
                             small-chips
                             v-model="model.pricing_types" :error-messages="errors"></v-select>
                 </ValidationProvider>
+
+                <div class="tw-flex tw-flex-col tw-space-y-3" v-for="(detail, index) in model.pricing_details">
+                  <div>
+                    <div>Per {{ pricingUnitsByKey[detail.type] }} Pricing</div>
+                    <div class="tw-flex tw-space-x-3">
+                      <ValidationProvider name="Current Price" :vid="'current_price'+index.toString()" rules="required"
+                                          v-slot="{errors}">
+                        <v-text-field v-model="model.pricing_details[index].price" dense label="Current Price"
+                                      hide-details="auto"
+                                      outlined
+                                      type="number"
+                                      :error-messages="errors"
+                        ></v-text-field>
+                      </ValidationProvider>
+                      <ValidationProvider name="Previous Price" :vid="'previous_price'+index.toString()"
+                                          rules="required"
+                                          v-slot="{errors}">
+                        <v-text-field v-model="model.pricing_details[index].previousPrice" dense label="Previous Price"
+                                      hide-details="auto"
+                                      outlined
+                                      type="number"
+                                      :error-messages="errors"
+                        ></v-text-field>
+                      </ValidationProvider>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </ValidationObserver>
@@ -52,7 +79,7 @@
 <script>
 import {buildFormData} from "../../utils/helpers";
 import ImageViewer from "./ImageViewer.vue";
-import {pricingUnits} from "../../utils/constants";
+import {pricingUnits, pricingUnitsByKey} from "../../utils/constants";
 import {difference} from 'lodash'
 
 export default {
@@ -78,6 +105,9 @@ export default {
     }
   },
   computed: {
+    pricingUnitsByKey() {
+      return pricingUnitsByKey
+    },
     action() {
       return this.id ? 'Edit' : 'Create'
     }
@@ -87,7 +117,7 @@ export default {
       handler: function (newVal, oldVal) {
         const addedItems = difference(newVal, oldVal)
         const removedItems = difference(oldVal, newVal)
-        const temp = this.model.pricing_details || []
+        const temp = this.model.pricing_details
 
         if (addedItems.length) {
           addedItems.forEach(item => {

@@ -3,3 +3,9 @@ export const pricingUnits = [
   {title: 'Plate', value: 'plate'},
   {title: 'Stick', value: 'stick'},
 ]
+
+export const pricingUnitsByKey = {
+  half: 'Half',
+  plate: 'Plate',
+  stick: 'Stick',
+}
