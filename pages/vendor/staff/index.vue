@@ -12,6 +12,8 @@
           prepend-inner-icon="mdi-magnify"
           v-model:trim="search"></v-text-field>
       </div>
+      <StaffCreateEdit @edited="fetch" @created="fetch" v-model="staffDialog" :id="selectedId"/>
+      <v-btn outlined color="primary" @click="showDialog(null)">Add Staff</v-btn>
       <v-btn color="primary" icon @click="fetch">
         <v-icon>mdi-refresh</v-icon>
       </v-btn>
@@ -37,9 +39,12 @@
         </template>
 
         <template v-slot:item.actions={item}>
-          <v-btn text small link color="primary" @click="resend(item.id)">Resend Email</v-btn>
+          <v-btn icon color="primary"
+                 @click="showDialog(item.id)">
+            <v-icon small>mdi-delete</v-icon>
+          </v-btn>
           <v-btn icon color="error"
-                 @click="destroy(item.id)">
+                 @click="remove(item.id)">
             <v-icon small>mdi-delete</v-icon>
           </v-btn>
         </template>
@@ -56,9 +61,11 @@
 <script>
 import {debounce} from 'lodash'
 import {currentTimezone} from "../../../utils/helpers";
+import StaffCreateEdit from "../../../components/staff/StaffCreateEdit.vue";
 
 export default {
   name: "IndexPage",
+  components: {StaffCreateEdit},
   middleware: ['auth'],
 
   data() {
@@ -75,8 +82,9 @@ export default {
       total: 0,
       filters: {},
       options: {itemsPerPage: 15},
-      range: []
-
+      range: [],
+      staffDialog: false,
+      selectedId: null
     }
   },
 
@@ -99,6 +107,10 @@ export default {
   },
 
   methods: {
+    showDialog(id) {
+      this.selectedId = id
+      this.staffDialog = true
+    },
     fetch() {
       const params = {
         ...this.$optionsToParams(this.options),
@@ -113,6 +125,20 @@ export default {
           this.loading = false
         }).catch(error => this.loading = false)
     },
+
+    remove(id) {
+      if (window.confirm('Are you sure you want to delete? This action cannot be undone.')) {
+        this.$axios.delete("/backend/api/users/" + id)
+          .then(resp => {
+            this.fetch()
+          }).catch(err => {
+          this.$root.$emit("toast", {
+            text: "Couldn't delete",
+            type: "error",
+          })
+        })
+      }
+    }
   }
 }
 </script>
