@@ -43,10 +43,6 @@
                  @click="showDialog(item.id)">
             <v-icon small>mdi-delete</v-icon>
           </v-btn>
-          <v-btn icon color="error"
-                 @click="remove(item.id)">
-            <v-icon small>mdi-delete</v-icon>
-          </v-btn>
         </template>
 
         <template v-slot:item.created_at={item}>
@@ -126,20 +122,6 @@ export default {
           this.loading = false
         }).catch(error => this.loading = false)
     },
-
-    remove(id) {
-      if (window.confirm('Are you sure you want to delete? This action cannot be undone.')) {
-        this.$axios.delete("/backend/api/users/" + id)
-          .then(resp => {
-            this.fetch()
-          }).catch(err => {
-          this.$root.$emit("toast", {
-            text: "Couldn't delete",
-            type: "error",
-          })
-        })
-      }
-    }
   }
 }
 </script>
