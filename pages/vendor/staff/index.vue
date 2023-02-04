@@ -69,7 +69,7 @@
 
         <template v-slot:item.created_at={item}>
           <div class="tw-text-end">
-            <div class="tw-text-xs tw-text-gray-700">{{ $moment(item.created_at).format('YYYY-MM-DD hh:mm A') }}</div>
+            <div class="tw-text-xs tw-text-gray-700">{{ $moment(item.created_at).format('MMM DD, YYYY') }}</div>
             <div class="tw-text-xs tw-text-gray-700">{{ $moment(item.created_at).fromNow() }}</div>
           </div>
         </template>
@@ -86,11 +86,6 @@ import {rolesByKey} from "../../../utils/constants";
 
 export default {
   name: "IndexPage",
-  computed: {
-    rolesByKey() {
-      return rolesByKey
-    }
-  },
   components: {StaffCreateEdit},
   middleware: ['auth'],
 
@@ -113,6 +108,12 @@ export default {
       range: [],
       staffDialog: false,
       selectedId: null
+    }
+  },
+
+  computed: {
+    rolesByKey() {
+      return rolesByKey
     }
   },
 
