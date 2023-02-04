@@ -55,6 +55,7 @@ export default {
           this.$axios.post("/backend/api/categories", {
             position: this.position,
             vendor_id: this.$auth.user.id,
+            menu_id: this.$auth.user.menu_id,
             ...this.model
           }).then(resp => {
             this.model.title = ''
