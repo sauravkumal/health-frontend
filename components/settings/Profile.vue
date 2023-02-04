@@ -64,7 +64,7 @@
               <ImageViewer width="200" :image="model.image" :url="model.thumb_image_url"></ImageViewer>
             </div>
             <div class="tw-flex tw-flex-col tw-space-y-3 tw-self-start">
-              <label>Select your location:</label>
+              <label>Select your location</label>
               <GMap class="tw-h-56 tw-w-96">
                 <GMapMarker :draggable="true" @dragend="setLatLng" v-if="model.lat && model.lng"
                             :center="{lat:parseFloat(model.lat), lng:parseFloat(model.lng)}"></GMapMarker>
