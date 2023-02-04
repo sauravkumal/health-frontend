@@ -1,5 +1,5 @@
 <template>
-  <table class="tw-w-full" @mouseenter="showActions=true" @mouseleave="showActions=false">
+  <table class="tw-w-full animation" @mouseenter="showActions=true" @mouseleave="showActions=false">
     <thead>
     <tr class="tw-w-full">
       <td class="tw-flex tw-space-x-4 tw-text-lg tw-pb-2 tw-items-center">
@@ -145,5 +145,9 @@ export default {
 <style scoped>
 .ghost {
   @apply tw-opacity-50 tw-bg-gray-300;
+}
+
+.animation {
+  transition: background-color 1s;
 }
 </style>

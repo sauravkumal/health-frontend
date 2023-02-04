@@ -65,8 +65,9 @@ export default {
         categoryId: null,
         position: null,
         dialog: false,
-        categoryTitle: null
+        categoryTitle: null,
       },
+      animationTimeout: null,
     }
   },
 
@@ -75,6 +76,10 @@ export default {
       const ref = this.$refs.categories.find(cat => cat.category.id === newVal)
       if (ref) {
         this.$vuetify.goTo(ref)
+        ref.$el.classList.add('tw-bg-gray-400')
+        this.animationTimeout = setTimeout(() => {
+          ref.$el.classList.remove('tw-bg-gray-400')
+        }, 1000)
       }
     },
     'productModel.dialog': function (newVal) {
