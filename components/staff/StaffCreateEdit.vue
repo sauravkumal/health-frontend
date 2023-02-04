@@ -67,12 +67,18 @@
                   <v-text-field
                     dense
                     outlined
-                    type="password"
+                    :type="showPassword?'text':'password'"
                     v-model="model.password"
                     label="Password"
                     hide-details="auto"
                     :error-messages="errors"
-                    item-value="value"/>
+                    item-value="value">
+                    <template v-slot:append>
+                      <v-btn small icon @click="showPassword=!showPassword">
+                        <v-icon small>{{ showPassword ? 'mdi-eye' : 'mdi-eye-off' }}</v-icon>
+                      </v-btn>
+                    </template>
+                  </v-text-field>
                 </ValidationProvider>
 
                 <v-switch v-model="model.active" label="Active"/>
@@ -101,6 +107,7 @@ export default {
   data() {
     return {
       dialog: this.value,
+      showPassword: false,
       model: {
         role: '',
         name: '',
