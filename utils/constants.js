@@ -9,3 +9,11 @@ export const pricingUnitsByKey = {
   full: 'Full',
   piece: 'Piece'
 }
+
+export const roles = [
+  {title: 'Waiter', value: 'waiter'},
+]
+
+export const rolesByKey = {
+  waiter: 'Waiter',
+}

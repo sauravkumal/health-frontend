@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     v-model="dialog"
-    width="800"
+    width="600"
   >
     <v-form @submit.prevent="saveModel">
       <v-card>
@@ -11,17 +11,69 @@
 
         <v-card-text class="tw-mt-4">
           <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-space-y-3">
-            <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
-              <v-text-field v-model="model.title" dense label="Title" hide-details="auto"
-                            outlined
-                            :error-messages="errors"
-              ></v-text-field>
-            </ValidationProvider>
             <div class="tw-flex tw-space-x-3">
               <div class="tw-flex tw-flex-col tw-space-y-3">
+                <ValidationProvider name="Role" vid="role" rules="required" v-slot="{errors}">
+                  <v-select :items="roles()"
+                            item-text="title"
+                            dense
+                            outlined
+                            v-model="model.role"
+                            label="Role"
+                            hide-details="auto"
+                            :error-messages="errors"
+                            item-value="value"/>
+
+                </ValidationProvider>
                 <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
-                              v-model="model.image" label="Image"></v-file-input>
+                              v-model="model.image" label="Profile"></v-file-input>
                 <ImageViewer :image="model.image" :url="model.thumb_image_url"></ImageViewer>
+              </div>
+              <div class="tw-flex tw-flex-col tw-space-y-3">
+                <ValidationProvider name="Name" vid="name" rules="required" v-slot="{errors}">
+                  <v-text-field
+                    dense
+                    outlined
+                    v-model="model.name"
+                    label="Name"
+                    hide-details="auto"
+                    :error-messages="errors"
+                    item-value="value"/>
+                </ValidationProvider>
+
+                <ValidationProvider name="Email" vid="email" rules="required|email" v-slot="{errors}">
+                  <v-text-field
+                    dense
+                    outlined
+                    v-model="model.email"
+                    label="Email"
+                    hide-details="auto"
+                    :error-messages="errors"
+                    item-value="value"/>
+                </ValidationProvider>
+
+                <ValidationProvider name="Phone No" vid="phone_no" rules="required" v-slot="{errors}">
+                  <v-text-field
+                    dense
+                    outlined
+                    v-model="model.phone_no"
+                    label="Phone No"
+                    hide-details="auto"
+                    :error-messages="errors"
+                    item-value="value"/>
+                </ValidationProvider>
+
+                <ValidationProvider name="Password" vid="password" rules="required" v-slot="{errors}">
+                  <v-text-field
+                    dense
+                    outlined
+                    type="password"
+                    v-model="model.password"
+                    label="Password"
+                    hide-details="auto"
+                    :error-messages="errors"
+                    item-value="value"/>
+                </ValidationProvider>
               </div>
             </div>
           </ValidationObserver>
@@ -38,6 +90,7 @@
 <script>
 import {buildFormData} from "../../utils/helpers";
 import ImageViewer from "../ImageViewer.vue";
+import {roles} from "../../utils/constants";
 
 export default {
   name: "StaffCreateEdit",
@@ -50,16 +103,16 @@ export default {
         role: '',
         name: '',
         email: '',
+        phone_no: '',
         password: '',
-        password_confirmation: '',
         image: undefined
       },
       defaultModel: {
         role: '',
         name: '',
         email: '',
+        phone_no: '',
         password: '',
-        password_confirmation: '',
         image: undefined
       },
       saving: false
@@ -92,6 +145,9 @@ export default {
     }
   },
   methods: {
+    roles() {
+      return roles
+    },
     fetchModel() {
       this.$axios.get("/backend/api/users/" + this.id)
         .then(resp => {
