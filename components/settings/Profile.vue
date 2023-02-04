@@ -3,26 +3,75 @@
     <v-card flat>
       <v-card-title>Profile</v-card-title>
       <v-card-text>
-        <ValidationProvider ref="validator" tag="div" class="tw-flex tw-space-x-6">
-          <div class="tw-flex tw-flex-col tw-space-y-3">
-            <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details
-                          v-model="model.image" label="Logo"></v-file-input>
-            <ImageViewer width="200" :image="model.image" :url="model.thumb_image_url"></ImageViewer>
-          </div>
-          <div class="tw-flex tw-flex-col tw-space-y-3">
-            <ValidationProvider name="Name" vid="name" rules="required" v-slot="{errors}"
-                                class="tw-flex tw-space-x-4 tw-items-end">
-              <label for="name">Name:</label>
-              <v-text-field
-                dense
-                id="name"
-                v-model="model.name"
-                hide-details="auto"
-                :error-messages="errors"
-                item-value="value"/>
-            </ValidationProvider>
-          </div>
-        </ValidationProvider>
+        <ValidationObserver ref="validator">
+          <ValidationProvider ref="validator" tag="div" class="tw-flex tw-space-x-6">
+            <div class="tw-flex tw-flex-col tw-space-y-3 tw-self-start">
+              <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
+                            v-model="model.image" label="Logo"></v-file-input>
+              <ImageViewer width="200" :image="model.image" :url="model.thumb_image_url"></ImageViewer>
+            </div>
+            <div class="tw-flex tw-flex-col tw-space-y-3 tw-self-start">
+              <ValidationProvider name="Name" vid="name" rules="required" v-slot="{errors}"
+                                  class="tw-flex tw-space-x-4 tw-items-center">
+                <label for="name">Name:</label>
+                <v-text-field
+                  dense
+                  id="name"
+                  outlined
+                  v-model="model.name"
+                  hide-details="auto"
+                  :error-messages="errors"
+                  item-value="value"/>
+              </ValidationProvider>
+
+              <ValidationProvider name="Email" vid="email" rules="required|email" v-slot="{errors}"
+                                  class="tw-flex tw-space-x-4 tw-items-center">
+                <label for="email">Email:</label>
+                <v-text-field
+                  dense
+                  id="email"
+                  outlined
+                  v-model="model.email"
+                  hide-details="auto"
+                  :error-messages="errors"
+                  item-value="value"/>
+              </ValidationProvider>
+
+              <ValidationProvider name="Phone No" vid="phone_no" rules="required" v-slot="{errors}"
+                                  class="tw-flex tw-space-x-4 tw-items-center">
+                <label for="phone_no">Phone No:</label>
+                <v-text-field
+                  dense
+                  id="phone_no"
+                  outlined
+                  v-model="model.phone_no"
+                  hide-details="auto"
+                  :error-messages="errors"
+                  item-value="value"/>
+              </ValidationProvider>
+
+              <ValidationProvider name="Address" vid="address" rules="required" v-slot="{errors}"
+                                  class="tw-flex tw-space-x-4 tw-items-center">
+                <label for="address">Address:</label>
+                <v-text-field
+                  dense
+                  id="address"
+                  outlined
+                  v-model="model.address"
+                  hide-details="auto"
+                  :error-messages="errors"
+                  item-value="value"/>
+              </ValidationProvider>
+            </div>
+            <div class="tw-flex tw-flex-col tw-space-y-3 tw-self-start">
+              <label>Select your location:</label>
+              <GMap class="tw-h-56 tw-w-96">
+                <GMapMarker :draggable="true" @dragend="setLatLng" v-if="model.lat && model.lng"
+                            :center="{lat:parseFloat(model.lat), lng:parseFloat(model.lng)}"></GMapMarker>
+              </GMap>
+            </div>
+          </ValidationProvider>
+        </ValidationObserver>
       </v-card-text>
       <v-card-actions>
         <v-spacer/>
@@ -35,10 +84,13 @@
 <script>
 import ImageViewer from "../ImageViewer.vue";
 import {buildFormData} from "../../utils/helpers";
+import GMap from "../GMap.vue";
+import GMapMarker from "../GMapMarker.vue";
+import {defaultCenter} from "../../utils/constants";
 
 export default {
   name: "Profile",
-  components: {ImageViewer},
+  components: {GMapMarker, GMap, ImageViewer},
   data() {
     return {
       saving: false,
@@ -46,14 +98,24 @@ export default {
     }
   },
 
+  mounted() {
+    if (!this.model.lat && !this.model.lng) {
+      this.model.lat = defaultCenter.lat
+      this.model.lng = defaultCenter.lng
+    }
+  },
+
   methods: {
+    setLatLng(event) {
+      this.model.lat = event.lat
+      this.model.lng = event.lng
+    },
     saveModel() {
-      console.log('sdfsd');
       this.$refs.validator.validate().then(valid => {
         if (valid) {
           this.saving = true
-          const {name, email, description, phone_no, image, lat, lng, address} = this.model
-          const params = {name, email, description, phone_no, image, lat, lng, address}
+          const {name, email, phone_no, image, lat, lng, address} = this.model
+          const params = {name, email, phone_no, image, lat, lng, address}
           const formData = new FormData()
           buildFormData(formData, params)
           formData.append('_method', 'PUT')

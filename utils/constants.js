@@ -17,3 +17,8 @@ export const roles = [
 export const rolesByKey = {
   waiter: 'Waiter',
 }
+
+export const defaultCenter = {
+  lat: 28.221350,
+  lng: 83.992994,
+}

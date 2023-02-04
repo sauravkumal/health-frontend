@@ -32,7 +32,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {src: '~/plugins/vee-validate.js'},
-    {src: '~/plugins/global.js'}
+    {src: '~/plugins/global.js'},
+    {src: '~/plugins/google-maps.js'}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -70,6 +71,7 @@ export default {
   },
 
   publicRuntimeConfig: {
+    mapsApiKey: process.env.MAPS_API_KEY,
     environment: process.env.NODE_ENV
   },
 
