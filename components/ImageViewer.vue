@@ -1,12 +1,12 @@
 <template>
-  <v-img :width="300"
+  <v-img :width="width||300" max-width="300"
          contain :src="imageUrl"/>
 </template>
 
 <script>
 export default {
   name: "ImageViewer",
-  props: ['image', 'url'],
+  props: ['image', 'url', 'width'],
 
   computed: {
     imageUrl() {

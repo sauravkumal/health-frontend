@@ -197,6 +197,11 @@ export default {
           title: 'Staff',
           to: '/vendor/staff'
         },
+        {
+          icon: 'mdi-account-cog',
+          title: 'Settings',
+          to: '/vendor/settings'
+        },
       ],
 
       snackbar: false,
