@@ -40,9 +40,9 @@
 
         <template v-slot:item.name="{item}">
           <div class="tw-py-2 tw-flex tw-space-x-2 tw-items-center">
-            <v-badge bottom bordered dot color="success" :value="true" offset-y="15" offset-x="15">
+            <v-badge bottom bordered dot color="success" :value="true" offset-y="12" offset-x="12">
               <v-avatar>
-                <v-icon size="40" class="tw-bg-gray-200">mdi-account</v-icon>
+                <v-icon size="50" class="tw-bg-gray-200">mdi-account</v-icon>
               </v-avatar>
             </v-badge>
             <div class="tw-font-bold tw-text-gray-700"> {{ item.name }}</div>
