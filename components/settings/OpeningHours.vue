@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import {buildFormData} from "../../utils/helpers";
 
 export default {
   name: "OpeningHours",
@@ -52,10 +51,7 @@ export default {
           this.saving = true
           const {opening_hours} = this.model
           const params = {opening_hours}
-          const formData = new FormData()
-          buildFormData(formData, params)
-          formData.append('_method', 'PUT')
-          this.$axios.post("/backend/api/users/" + this.model.id, formData).then(resp => {
+          this.$axios.put("/backend/api/users/" + this.model.id, params).then(resp => {
             this.$refs.validator.reset()
             this.saving = false
             this.$root.$emit("toast", {
@@ -65,6 +61,7 @@ export default {
             this.$auth.fetchUser()
           })
             .catch(error => {
+              this.model.opening_hours = JSON.parse(JSON.stringify(this.$auth.user.opening_hours))
               this.saving = false
               this.$root.$emit("toast", {
                 text: "Couldn't save",
