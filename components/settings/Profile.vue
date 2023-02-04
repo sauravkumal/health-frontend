@@ -1,15 +1,27 @@
 <template>
-  <v-form>
-    <v-card flat @submit.prevent="saveModel">
+  <v-form @submit.prevent="saveModel">
+    <v-card flat>
       <v-card-title>Profile</v-card-title>
       <v-card-text>
-        <ValidationProvider ref="validator" tag="div" class="tw-flex tw-space-x-3">
+        <ValidationProvider ref="validator" tag="div" class="tw-flex tw-space-x-6">
           <div class="tw-flex tw-flex-col tw-space-y-3">
             <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details
                           v-model="model.image" label="Logo"></v-file-input>
             <ImageViewer width="200" :image="model.image" :url="model.thumb_image_url"></ImageViewer>
           </div>
-          <div></div>
+          <div class="tw-flex tw-flex-col tw-space-y-3">
+            <ValidationProvider name="Name" vid="name" rules="required" v-slot="{errors}"
+                                class="tw-flex tw-space-x-4 tw-items-end">
+              <label for="name">Name:</label>
+              <v-text-field
+                dense
+                id="name"
+                v-model="model.name"
+                hide-details="auto"
+                :error-messages="errors"
+                item-value="value"/>
+            </ValidationProvider>
+          </div>
         </ValidationProvider>
       </v-card-text>
       <v-card-actions>
@@ -36,6 +48,7 @@ export default {
 
   methods: {
     saveModel() {
+      console.log('sdfsd');
       this.$refs.validator.validate().then(valid => {
         if (valid) {
           this.saving = true
@@ -51,6 +64,7 @@ export default {
               text: "Saved",
               type: "success",
             })
+            this.$auth.fetchUser()
           })
             .catch(error => {
               this.saving = false
