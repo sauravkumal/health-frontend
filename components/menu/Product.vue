@@ -37,7 +37,7 @@
               class="tw-flex tw-flex-col tw-border last:tw-border-0 tw-border-x-0 tw-border-t-0 tw-border-solid tw-border-gray-300"
               v-for="(detail, index) in product.pricing_details">
               <div class="tw-flex tw-justify-between tw-items-baseline">
-                <div>Per {{ pricingUnitsByKey[detail.type] }}:</div>
+                <div>Per {{ pricingUnitsByKey[detail.type] }}</div>
                 <div class="tw-text-2xl tw-text-orange-500">Rs {{ currency(detail.price) }}</div>
               </div>
               <div v-if="detail.previousPrice"
