@@ -3,32 +3,35 @@
     <v-card flat>
       <v-card-title>Opening Hours</v-card-title>
       <v-card-text>
-        <ValidationObserver ref="validator" class="tw-flex tw-flex-col tw-space-y-3">
-          <div class="tw-flex tw-space-x-3 tw-items-center" v-for="(item, index) in model.opening_hours" :key="index">
-            <div class="tw-font-semibold">{{ item.title }}</div>
-            <v-switch class="!tw-mt-0 !tw-pt-0" hide-details v-model="model.opening_hours[index].enabled"></v-switch>
-            <label :for="item.title+'open'">Open</label>
-            <ValidationProvider name="Open" :vid="index.toString()+'open'" rules="required" v-slot="{errors}">
+        <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-space-y-2">
+          <div class="tw-grid tw-grid-cols-12 tw-gap-x-2 tw-items-center"
+               v-for="(item, index) in model.opening_hours"
+               :key="index">
+            <div class="tw-font-semibold tw-col-span-2">{{ item.title }}</div>
+            <v-switch class="!tw-mt-0 !tw-pt-0 tw-col-span-1" hide-details
+                      v-model="model.opening_hours[index].enabled"></v-switch>
+            <label :for="item.title+'open'" class="tw-text-end">Open</label>
+            <ValidationProvider class="tw-col-span-3" name="Open" :vid="index.toString()+'open'" rules="required"
+                                v-slot="{errors}">
               <v-text-field type="time" dense outlined hide-details="auto" :id="item.title+'open'"
                             :error-messages="errors"
                             :disabled="!item.enabled"
                             v-model="model.opening_hours[index].open"></v-text-field>
             </ValidationProvider>
 
-            <label :for="item.title+'close'">Close</label>
-            <ValidationProvider name="To" :vid="index.toString()+'close'" rules="required" v-slot="{errors}">
+            <label :for="item.title+'close'" class="tw-text-end">Close</label>
+            <ValidationProvider class="tw-col-span-3" name="To" :vid="index.toString()+'close'" rules="required"
+                                v-slot="{errors}">
               <v-text-field type="time" dense outlined hide-details="auto" :id="item.title+'close'"
                             :error-messages="errors"
                             :disabled="!item.enabled"
                             v-model="model.opening_hours[index].close"></v-text-field>
             </ValidationProvider>
           </div>
-
         </ValidationObserver>
       </v-card-text>
       <v-card-actions>
-        <v-spacer/>
-        <v-btn type="submit" color="success" depressed :loading="saving">Save</v-btn>
+        <v-btn small type="submit" color="success" depressed :loading="saving">Save</v-btn>
       </v-card-actions>
     </v-card>
   </v-form>

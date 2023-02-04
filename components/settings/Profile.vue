@@ -74,8 +74,7 @@
         </ValidationObserver>
       </v-card-text>
       <v-card-actions>
-        <v-spacer/>
-        <v-btn type="submit" color="success" depressed :loading="saving">Save</v-btn>
+        <v-btn small type="submit" color="success" depressed :loading="saving">Save</v-btn>
       </v-card-actions>
     </v-card>
   </v-form>
