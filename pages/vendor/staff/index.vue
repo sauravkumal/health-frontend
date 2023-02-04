@@ -55,7 +55,7 @@
         </template>
 
         <template v-slot:item.active="{item}">
-          <v-icon :color="item.active?'success':'secondary'">
+          <v-icon :color="item.active?'success':'grey'">
             {{ item.active ? 'mdi-check-circle' : 'mdi-close-circle' }}
           </v-icon>
         </template>
