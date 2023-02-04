@@ -7,17 +7,17 @@
           <div class="tw-flex tw-space-x-3 tw-items-center" v-for="(item, index) in model.opening_hours" :key="index">
             <div class="tw-font-semibold">{{ item.title }}</div>
             <v-switch class="!tw-mt-0 !tw-pt-0" hide-details v-model="model.opening_hours[index].enabled"></v-switch>
-            <label :for="item.title+'from'">From</label>
-            <ValidationProvider name="From" :vid="index.toString()+'from'" rules="required" v-slot:="{errors}">
-              <v-text-field type="time" dense outlined hide-details="auto" :id="item.title+'from'"
+            <label :for="item.title+'open'">Open</label>
+            <ValidationProvider name="Open" :vid="index.toString()+'open'" rules="required" v-slot="{errors}">
+              <v-text-field type="time" dense outlined hide-details="auto" :id="item.title+'open'"
                             :error-messages="errors"
                             :disabled="!item.enabled"
                             v-model="model.opening_hours[index].open"></v-text-field>
             </ValidationProvider>
 
-            <label :for="item.title+'to'">From</label>
-            <ValidationProvider name="To" :vid="index.toString()+'to'" rules="required" v-slot:="{errors}">
-              <v-text-field type="time" dense outlined hide-details="auto" :id="item.title+'from'"
+            <label :for="item.title+'close'">Close</label>
+            <ValidationProvider name="To" :vid="index.toString()+'close'" rules="required" v-slot="{errors}">
+              <v-text-field type="time" dense outlined hide-details="auto" :id="item.title+'close'"
                             :error-messages="errors"
                             :disabled="!item.enabled"
                             v-model="model.opening_hours[index].close"></v-text-field>
