@@ -8,7 +8,7 @@
       width="230"
       app
     >
-      <v-list dense>
+      <v-list shaped dense>
         <template v-for="(item,index) in items">
           <template v-if="item.divider">
             <v-divider/>
