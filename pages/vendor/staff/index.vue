@@ -41,7 +41,7 @@
         <template v-slot:item.actions={item}>
           <v-btn icon color="primary"
                  @click="showDialog(item.id)">
-            <v-icon small>mdi-delete</v-icon>
+            <v-icon small>mdi-pencil</v-icon>
           </v-btn>
         </template>
 
@@ -72,6 +72,7 @@ export default {
         {text: 'Role', align: 'start', sortable: false, value: 'role'},
         {text: 'Active', align: 'start', sortable: false, value: 'active'},
         {text: 'Created At', align: 'start', sortable: false, value: 'created_at'},
+        {text: 'Actions', align: 'start', sortable: false, value: 'actions'},
       ],
       search: '',
 
@@ -91,6 +92,11 @@ export default {
         this.fetch()
       },
       deep: true,
+    },
+    staffDialog: function (newVal) {
+      if (!newVal) {
+        this.selectedId = null
+      }
     },
     filters: {
       handler() {

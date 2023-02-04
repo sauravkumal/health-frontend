@@ -63,7 +63,7 @@
                     item-value="value"/>
                 </ValidationProvider>
 
-                <ValidationProvider name="Password" vid="password" rules="required" v-slot="{errors}">
+                <ValidationProvider name="Password" vid="password" :rules="this.id?'':'required'" v-slot="{errors}">
                   <v-text-field
                     dense
                     outlined
@@ -74,6 +74,8 @@
                     :error-messages="errors"
                     item-value="value"/>
                 </ValidationProvider>
+
+                <v-switch v-model="model.active" label="Active"/>
               </div>
             </div>
           </ValidationObserver>
@@ -105,6 +107,7 @@ export default {
         email: '',
         phone_no: '',
         password: '',
+        active: true,
         image: undefined
       },
       defaultModel: {
@@ -113,6 +116,7 @@ export default {
         email: '',
         phone_no: '',
         password: '',
+        active: true,
         image: undefined
       },
       saving: false
@@ -151,14 +155,14 @@ export default {
     fetchModel() {
       this.$axios.get("/backend/api/users/" + this.id)
         .then(resp => {
-          this.model = resp.data.data
+          this.model = resp.data
         })
     },
     saveModel() {
       this.$refs.validator.validate().then(valid => {
         if (valid) {
           this.saving = true
-          const params = {...this.model}
+          const params = {...this.model, active: this.model.active ? '1' : '0'}
           const formData = new FormData()
           buildFormData(formData, params)
           if (this.id) {
