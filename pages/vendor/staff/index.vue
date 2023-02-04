@@ -106,7 +106,7 @@ export default {
         filters: this.filters,
       }
       this.loading = true
-      this.$axios.get('/backend/api/staff', {params})
+      this.$axios.get('/backend/api/users', {params})
         .then(resp => {
           this.items = resp.data.data
           this.total = resp.data.meta.total

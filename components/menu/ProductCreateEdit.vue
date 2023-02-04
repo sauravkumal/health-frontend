@@ -84,7 +84,7 @@
 
 <script>
 import {buildFormData} from "../../utils/helpers";
-import ImageViewer from "./ImageViewer.vue";
+import ImageViewer from "../ImageViewer.vue";
 import {pricingUnits, pricingUnitsByKey} from "../../utils/constants";
 import {difference} from 'lodash'
 
