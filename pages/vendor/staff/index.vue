@@ -1,7 +1,8 @@
 <template>
   <v-card flat>
+    <StaffCreateEdit @edited="fetch" @created="fetch" v-model="staffDialog" :id="selectedId"/>
     <v-card-title class="tw-justify-between">
-      <div>
+      <div class="tw-flex tw-space-x-2 tw-items-end">
         <v-text-field
           hide-details
           label="Search.."
@@ -11,9 +12,8 @@
           outlined
           prepend-inner-icon="mdi-magnify"
           v-model:trim="search"></v-text-field>
+        <v-btn outlined color="primary" @click="showDialog(null)">Add Staff</v-btn>
       </div>
-      <StaffCreateEdit @edited="fetch" @created="fetch" v-model="staffDialog" :id="selectedId"/>
-      <v-btn outlined color="primary" @click="showDialog(null)">Add Staff</v-btn>
       <v-btn color="primary" icon @click="fetch">
         <v-icon>mdi-refresh</v-icon>
       </v-btn>
@@ -74,6 +74,7 @@ export default {
       headers: [
         {text: 'Name', align: 'start', sortable: false, value: 'name'},
         {text: 'Role', align: 'start', sortable: false, value: 'role'},
+        {text: 'Active', align: 'start', sortable: false, value: 'active'},
         {text: 'Created At', align: 'start', sortable: false, value: 'created_at'},
       ],
       search: '',
