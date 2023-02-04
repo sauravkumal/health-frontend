@@ -3,10 +3,10 @@
     <v-card-title class="tw-justify-between">
       <div class="tw-flex tw-space-x-6 tw-items-center">
         <div>Menu</div>
-        <v-switch color="success" label="Published" v-model="publishMenu"></v-switch>
+        <v-switch color="success" label="Published" v-model="menu.published"></v-switch>
       </div>
       <div class="tw-flex tw-space-x-2 tw-items-end">
-        <CategoryCreate @created="fetch" :position="menu.length"></CategoryCreate>
+        <CategoryCreate @created="fetch" :position="menu.categories.length"></CategoryCreate>
         <ProductCreateEdit @created="fetch" v-model="productModel.dialog" :category-id="productModel.categoryId"
                            :category-title="productModel.categoryTitle"
                            :id="productModel.id"
@@ -14,7 +14,7 @@
 
         <v-select single-line outlined label="Search.."
                   dense hide-details
-                  :items="menu"
+                  :items="menu.categories"
                   item-text="title"
                   item-value="id"
                   v-model="search"
@@ -24,14 +24,15 @@
     </v-card-title>
     <v-card-text>
       <div class="tw-p-2 tw-border tw-border-solid tw-border-gray-200">
-        <Draggable class="tw-flex tw-flex-col tw-space-y-4" v-model="menu" @start="drag=true" @end="drag=false"
+        <Draggable class="tw-flex tw-flex-col tw-space-y-4" v-model="menu.categories" @start="drag=true"
+                   @end="drag=false"
                    ghost-class="ghost">
           <Category @edited="fetch"
                     @createProduct="createProduct"
                     @editProduct="editProduct"
                     ref="categories"
                     :category="category"
-                    v-for="(category, index) in menu" :key="index"/>
+                    v-for="(category, index) in menu.categories" :key="index"/>
         </Draggable>
       </div>
     </v-card-text>
@@ -55,8 +56,10 @@ export default {
   data() {
     return {
       drag: false,
-      publishMenu: this.$auth.user.publish_menu,
-      menu: [],
+      menu: {
+        published: false,
+        categories: []
+      },
       search: null,
       productModel: {
         categoryId: null,
@@ -84,7 +87,7 @@ export default {
         }
       }
     },
-    publishMenu: function (newVal) {
+    'menu.published': function (newVal) {
       this.updatePublishMenu()
     }
   },
@@ -96,16 +99,21 @@ export default {
   methods: {
     fetch() {
       this.loading = true
-      this.$axios.get('/backend/api/vendor/menu')
+      this.$axios.get('/backend/api/menus/' + this.$auth.user.menu_id, {
+        params: {
+          with: ['categories.products']
+        }
+      })
         .then(resp => {
           this.menu = resp.data.data
         })
     },
 
     updatePublishMenu() {
-      this.$axios.post('/backend/api/vendor/menu/publish', {publish: this.publishMenu})
+      this.$axios.put('/backend/api/menus/' + this.menu.id, {published: this.menu.published})
         .then(resp => {
         }).catch(error => {
+        this.menu.published = !this.menu.published
         this.$root.$emit("toast", {
           text: "Couldn't save",
           type: "error",

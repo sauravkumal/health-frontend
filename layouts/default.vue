@@ -192,6 +192,11 @@ export default {
           title: 'Menu',
           to: '/vendor/menu'
         },
+        {
+          icon: 'mdi-account-group-outline',
+          title: 'Staff',
+          to: '/vendor/staff'
+        },
       ],
 
       snackbar: false,
