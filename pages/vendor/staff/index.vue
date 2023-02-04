@@ -38,6 +38,28 @@
             items-per-page-text="$vuetify.dataTable.itemsPerPageText"/>
         </template>
 
+        <template v-slot:item.name="{item}">
+          <div class="tw-py-2 tw-flex tw-space-x-2 tw-items-center">
+            <v-badge bottom bordered dot color="success" :value="true" offset-y="15" offset-x="15">
+              <v-avatar>
+                <v-icon size="40" class="tw-bg-gray-200">mdi-account</v-icon>
+              </v-avatar>
+            </v-badge>
+            <div class="tw-font-bold tw-text-gray-700"> {{ item.name }}</div>
+          </div>
+        </template>
+
+
+        <template v-slot:item.role="{item}">
+          {{ rolesByKey[item.role] }}
+        </template>
+
+        <template v-slot:item.active="{item}">
+          <v-icon :color="item.active?'success':'secondary'">
+            {{ item.active ? 'mdi-check-circle' : 'mdi-close-circle' }}
+          </v-icon>
+        </template>
+
         <template v-slot:item.actions={item}>
           <v-btn icon color="primary"
                  @click="showDialog(item.id)">
@@ -46,8 +68,10 @@
         </template>
 
         <template v-slot:item.created_at={item}>
-          {{ $moment(item.created_at).format('YYYY-MM-DD hh:mm A') }}
-          <span class="tw-ml-4 tw-text-xs">{{ $moment(item.created_at).fromNow() }}</span>
+          <div class="tw-text-end">
+            <div class="tw-text-xs tw-text-gray-700">{{ $moment(item.created_at).format('YYYY-MM-DD hh:mm A') }}</div>
+            <div class="tw-text-xs tw-text-gray-700">{{ $moment(item.created_at).fromNow() }}</div>
+          </div>
         </template>
       </v-data-table>
     </v-card-text>
@@ -58,9 +82,15 @@
 import {debounce} from 'lodash'
 import {currentTimezone} from "../../../utils/helpers";
 import StaffCreateEdit from "../../../components/staff/StaffCreateEdit.vue";
+import {rolesByKey} from "../../../utils/constants";
 
 export default {
   name: "IndexPage",
+  computed: {
+    rolesByKey() {
+      return rolesByKey
+    }
+  },
   components: {StaffCreateEdit},
   middleware: ['auth'],
 
@@ -71,8 +101,8 @@ export default {
         {text: 'Name', align: 'start', sortable: false, value: 'name'},
         {text: 'Role', align: 'start', sortable: false, value: 'role'},
         {text: 'Active', align: 'start', sortable: false, value: 'active'},
-        {text: 'Created At', align: 'start', sortable: false, value: 'created_at'},
         {text: 'Actions', align: 'start', sortable: false, value: 'actions'},
+        {text: 'Created At', align: 'end', sortable: false, value: 'created_at'},
       ],
       search: '',
 
