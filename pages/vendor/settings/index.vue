@@ -2,19 +2,18 @@
   <div>
     <Profile/>
     <v-divider/>
-    <v-card flat>
-      <v-card-title>Open Hours</v-card-title>
-    </v-card>
+    <OpeningHours/>
   </div>
 
 </template>
 
 <script>
 import Profile from "../../../components/settings/Profile.vue";
+import OpeningHours from "../../../components/settings/OpeningHours.vue";
 
 export default {
   name: "IndexPage",
-  components: {Profile},
+  components: {OpeningHours, Profile},
   middleware: ['auth'],
 }
 </script>
