@@ -5,12 +5,7 @@
       <v-card-text>
         <ValidationObserver ref="validator">
           <ValidationProvider ref="validator" tag="div" class="tw-flex tw-space-x-6">
-            <div class="tw-flex tw-flex-col tw-space-y-3 tw-self-start">
-              <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
-                            v-model="model.image" label="Logo"></v-file-input>
-              <ImageViewer width="200" :image="model.image" :url="model.thumb_image_url"></ImageViewer>
-            </div>
-            <div class="tw-flex tw-flex-col tw-space-y-3 tw-self-start">
+            <div class="tw-flex tw-grow tw-flex-col tw-space-y-3 tw-self-start">
               <ValidationProvider name="Name" vid="name" rules="required" v-slot="{errors}"
                                   class="tw-flex tw-space-x-4 tw-items-center">
                 <label for="name">Name:</label>
@@ -62,6 +57,11 @@
                   :error-messages="errors"
                   item-value="value"/>
               </ValidationProvider>
+            </div>
+            <div class="tw-flex tw-flex-col tw-space-y-3 tw-self-start">
+              <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
+                            v-model="model.image" label="Logo"></v-file-input>
+              <ImageViewer width="200" :image="model.image" :url="model.thumb_image_url"></ImageViewer>
             </div>
             <div class="tw-flex tw-flex-col tw-space-y-3 tw-self-start">
               <label>Select your location:</label>
