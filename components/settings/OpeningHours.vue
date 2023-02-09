@@ -1,6 +1,6 @@
 <template>
   <v-form @submit.prevent="saveModel">
-    <v-card flat>
+    <v-card elevation="4">
       <v-card-title>Opening Hours</v-card-title>
       <v-card-text>
         <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-space-y-2">

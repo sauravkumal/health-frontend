@@ -2,13 +2,18 @@
   <v-app dark>
     <v-navigation-drawer
       v-model="drawer"
-      :mini-variant="false"
-      :clipped="true"
       fixed
       width="230"
       app
+      floating
+      color="#f5f5f5"
     >
       <v-list shaped dense>
+        <v-list-item>
+          <div class="tw-text-3xl tw-text-orange-700">
+            GFC
+          </div>
+        </v-list-item>
         <template v-for="(item,index) in items">
           <template v-if="item.divider">
             <v-divider/>
@@ -89,10 +94,8 @@
 
     <v-app-bar
       :clipped-left="true"
-      color="primary"
       fixed
       app
-      dark
       flat
       dense
     >
@@ -146,8 +149,10 @@
       </v-menu>
 
     </v-app-bar>
-    <v-main>
-      <Nuxt/>
+    <v-main class="tw-bg-[#f5f5f5]">
+      <div class="sm:tw-m-2">
+        <Nuxt/>
+      </div>
     </v-main>
     <v-snackbar v-model="snackbar" :color="snackbarColor" app>
       {{ snackbarText }}

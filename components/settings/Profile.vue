@@ -1,6 +1,6 @@
 <template>
   <v-form @submit.prevent="saveModel">
-    <v-card flat>
+    <v-card  elevation="4">
       <v-card-title>Profile</v-card-title>
       <v-card-text>
         <ValidationObserver ref="validator">

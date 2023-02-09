@@ -4,7 +4,7 @@
     width="600"
   >
     <v-form @submit.prevent="saveModel">
-      <v-card>
+      <v-card  elevation="4">
         <v-card-title class="text-h5 grey lighten-2">
           {{ action }} Staff
         </v-card-title>

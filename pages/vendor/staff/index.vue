@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card elevation="4">
     <StaffCreateEdit @edited="fetch" @created="fetch" v-model="staffDialog" :id="selectedId"/>
     <v-card-title class="tw-justify-between">
       <div class="tw-flex tw-space-x-2 tw-items-end">

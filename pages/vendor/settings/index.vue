@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div class="tw-flex tw-flex-col tw-gap-2">
     <Profile/>
-    <v-divider/>
     <OpeningHours/>
   </div>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card elevation="4">
     <v-card-title class="tw-justify-between">
       <div class="tw-flex tw-space-x-6 tw-items-center">
         <div>Menu</div>
