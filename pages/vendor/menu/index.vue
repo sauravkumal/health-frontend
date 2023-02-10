@@ -23,7 +23,7 @@
       </div>
     </v-card-title>
     <v-card-text>
-      <div class="tw-p-2 tw-border tw-border-solid tw-border-gray-200">
+      <div>
         <Draggable class="tw-flex tw-flex-col tw-space-y-4" v-model="menu.categories" @start="drag=true"
                    @end="drag=false"
                    ghost-class="ghost">

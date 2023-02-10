@@ -45,12 +45,14 @@ export default {
     {
       buildModules: [
         '@nuxtjs/vuetify',
+        '@nuxt/postcss8',
         '@nuxtjs/moment'
       ]
     } :
     {
       buildModules: [
         '@nuxtjs/vuetify',
+        '@nuxt/postcss8',
         '@nuxtjs/moment',
         '@nuxtjs/pwa'
       ]

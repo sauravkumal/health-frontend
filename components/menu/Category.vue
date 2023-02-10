@@ -1,61 +1,65 @@
 <template>
-  <table class="tw-w-full animation" @mouseenter="showActions=true" @mouseleave="showActions=false">
-    <thead>
-    <tr class="tw-w-full">
-      <td class="tw-flex tw-space-x-4 tw-text-lg tw-pb-2 tw-items-center">
-        <v-avatar size="25" color="primary" class="tw-text-white">{{ $vnode.key + 1 }}</v-avatar>
-        <template v-if="edit">
-          <v-form @submit.prevent="saveModel" class="tw-flex tw-space-x-2">
-            <ValidationObserver ref="validator">
-              <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
-                <v-text-field v-model="model.title" dense single-line label="Title" hide-details="auto"
-                              outlined
-                              :error-messages="errors"
-                ></v-text-field>
-              </ValidationProvider>
-            </ValidationObserver>
-            <v-btn small type="submit" color="success" icon :loading="saving">
-              <v-icon>mdi-check</v-icon>
-            </v-btn>
-            <v-btn small color="error" icon @click="edit=false">
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
-          </v-form>
-        </template>
-        <span v-else class="tw-ml-4">{{ category.title }}</span>
-        <template v-if="showActions && !edit">
-          <v-btn text x-small @mouseenter.native @mouseleave.native
-                 color="primary" @click="showEdit">Edit
-          </v-btn>
-          <v-btn text x-small @mouseenter.native @mouseleave.native
-                 color="primary"
-                 @click="$emit('createProduct',{categoryId: category.id, position:category.products.length, categoryTitle: category.title})">
-            Add New Product
-          </v-btn>
-          <v-btn text x-small @mouseenter.native @mouseleave.native
-                 color="error" @click="remove">Delete
-          </v-btn>
-        </template>
-      </td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td class="tw-border tw-border-solid tw-border-gray-200 tw-p-4 tw-bg-gray-50">
-        <Draggable class="tw-flex tw-flex-wrap tw-gap-x-2 tw-gap-y-2" v-model="category.products"
-                   @start="drag=true"
-                   @end="drag=false"
-                   ghost-class="ghost">
-          <Product :key="index"
-                   v-on="$listeners"
-                   :product="product"
-                   :category="category"
-                   v-for="(product, index) in category.products"/>
-        </Draggable>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <v-card class="!tw-bg-gray-200">
+    <v-card-text>
+      <table class="tw-w-full animation" @mouseenter="showActions=true" @mouseleave="showActions=false">
+        <thead>
+        <tr class="tw-w-full">
+          <td class="tw-flex tw-space-x-4 tw-text-lg tw-pb-2 tw-items-center">
+            <v-avatar size="25" color="primary" class="tw-text-white">{{ $vnode.key + 1 }}</v-avatar>
+            <template v-if="edit">
+              <v-form @submit.prevent="saveModel" class="tw-flex tw-space-x-2">
+                <ValidationObserver ref="validator">
+                  <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
+                    <v-text-field v-model="model.title" dense single-line label="Title" hide-details="auto"
+                                  outlined
+                                  :error-messages="errors"
+                    ></v-text-field>
+                  </ValidationProvider>
+                </ValidationObserver>
+                <v-btn small type="submit" color="success" icon :loading="saving">
+                  <v-icon>mdi-check</v-icon>
+                </v-btn>
+                <v-btn small color="error" icon @click="edit=false">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </v-form>
+            </template>
+            <span v-else class="tw-ml-4">{{ category.title }}</span>
+            <template v-if="showActions && !edit">
+              <v-btn text x-small @mouseenter.native @mouseleave.native
+                     color="primary" @click="showEdit">Edit
+              </v-btn>
+              <v-btn text x-small @mouseenter.native @mouseleave.native
+                     color="primary"
+                     @click="$emit('createProduct',{categoryId: category.id, position:category.products.length, categoryTitle: category.title})">
+                Add New Product
+              </v-btn>
+              <v-btn text x-small @mouseenter.native @mouseleave.native
+                     color="error" @click="remove">Delete
+              </v-btn>
+            </template>
+          </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="tw-p-2">
+            <Draggable class="tw-flex tw-flex-wrap tw-gap-x-2 tw-gap-y-2" v-model="category.products"
+                       @start="drag=true"
+                       @end="drag=false"
+                       ghost-class="ghost">
+              <Product :key="index"
+                       v-on="$listeners"
+                       :product="product"
+                       :category="category"
+                       v-for="(product, index) in category.products"/>
+            </Draggable>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
