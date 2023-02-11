@@ -1,5 +1,5 @@
 <template>
-  <v-card class="!tw-bg-gray-200 tw-p-2 !animation" ripple>
+  <v-card class="!tw-bg-gray-200 tw-p-2 !animation">
     <table class="tw-w-full" @mouseenter="showActions=true" @mouseleave="showActions=false">
       <thead>
       <tr class="tw-w-full">

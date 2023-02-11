@@ -1,66 +1,49 @@
 <template>
-  <table class="tw-h-full tw-border tw-border-solid tw-border-gray-300 tw-border-collapse"
-         @mouseenter="showActions=true" @mouseleave="showActions=false"
-  >
-    <thead>
-    <tr>
-      <td class="tw-flex tw-flex-wrap tw-gap-x-1 tw-bg-gray-200 tw-px-2 tw-text-base tw-py-1 tw-items-center">
-        <div>{{ $vnode.key + 1 }}.</div>
-        <div class="tw-text-sm tw-font-medium">{{ product.title }}</div>
-        <template v-if="showActions">
-          <v-btn icon x-small @mouseenter.native @mouseleave.native
-                 @click="$emit('editProduct',{id:product.id,
-                categoryId: category.id,
-                position:category.products.length,
-                categoryTitle: category.title})"
-                 color="primary">
-            <v-icon small>mdi-pencil</v-icon>
-          </v-btn>
+  <v-card ripple elevation="4" width="150">
+    <v-img v-if="product.thumb_image_url" :src="product.thumb_image_url" height="70"></v-img>
+    <div class="tw-p-2">
+      <div class="tw-font-semibold">{{ product.title }}</div>
+      <div>
+        <div
+          class="tw-flex tw-flex-col tw-border last:tw-border-0 tw-border-x-0 tw-border-t-0 tw-border-solid tw-border-gray-300"
+          v-for="(detail, index) in product.pricing_details">
+          <div class="tw-flex tw-justify-between tw-items-baseline">
+            <div class="tw-text-xs">Per {{ pricingUnitsByKey[detail.type] }}</div>
+            <div class="tw-text-sm tw-text-orange-500">Rs {{ currency(detail.price) }}</div>
+          </div>
+          <div v-if="detail.previousPrice"
+               class="tw-text-gray-400 tw-text-xs tw-text-end"><span class="tw-line-through">Rs {{
+              detail.previousPrice
+            }}</span>
+            <span class="tw-text-gray-800">{{ discountPercent(detail).toFixed(2) }}%</span>
+          </div>
 
-          <v-btn icon x-small @mouseenter.native @mouseleave.native
-                 color="error" @click="remove">
-            <v-icon>mdi-delete</v-icon>
-          </v-btn>
-        </template>
-      </td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td class="tw-p-1">
-        <div class="tw-grid tw-grid-cols-8 tw-gap-x-2">
-          <v-img v-if="product.thumb_image_url" class="tw-col-span-3 tw-border tw-border-solid tw-border-gray-300"
-                 :src="product.thumb_image_url"
-                 width="100"></v-img>
-          <div class="tw-col-span-5">
-            <div
-              class="tw-flex tw-flex-col tw-border last:tw-border-0 tw-border-x-0 tw-border-t-0 tw-border-solid tw-border-gray-300"
-              v-for="(detail, index) in product.pricing_details">
-              <div class="tw-flex tw-justify-between tw-items-baseline">
-                <div>Per {{ pricingUnitsByKey[detail.type] }}</div>
-                <div class="tw-text-2xl tw-text-orange-500">Rs {{ currency(detail.price) }}</div>
-              </div>
-              <div v-if="detail.previousPrice"
-                   class="tw-text-gray-400 tw-text-xs tw-text-end"><span class="tw-line-through">Rs {{
-                  detail.previousPrice
-                }}</span>
-                <span class="tw-text-gray-800">{{ discountPercent(detail).toFixed(2) }}%</span>
-              </div>
-
-              <div v-if="detail.credits" class="tw-flex tw-justify-between tw-items-baseline">
-                <div>Credits:</div>
-                <div class="tw-text-orange-500">Rs {{
-                    detail.credits
-                  }}
-                </div>
-              </div>
+          <div v-if="detail.credits" class="tw-flex tw-justify-between tw-items-baseline">
+            <div>Credits:</div>
+            <div class="tw-text-orange-500">Rs {{
+                detail.credits
+              }}
             </div>
           </div>
         </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+
+      </div>
+      <div class="tw-flex tw-justify-between">
+        <v-btn icon x-small @mouseenter.native @mouseleave.native
+               @click="$emit('editProduct',{id:product.id,
+                categoryId: category.id,
+                position:category.products.length,
+                categoryTitle: category.title})"
+               color="primary">
+          <v-icon small>mdi-pencil</v-icon>
+        </v-btn>
+        <v-btn icon x-small @mouseenter.native @mouseleave.native
+               color="error" @click="remove">
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </div>
+    </div>
+  </v-card>
 </template>
 
 <script>
@@ -80,7 +63,6 @@ export default {
   data() {
     return {
       drag: false,
-      showActions: false,
       model: null,
       saving: false
     }
