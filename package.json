@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "nuxt",
+    "dev-lan": "NUXT_HOST=0.0.0.0 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
