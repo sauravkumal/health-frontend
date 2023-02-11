@@ -1,12 +1,12 @@
 <template>
   <v-dialog
     v-model="dialog"
-    width="800"
+    class="!tw-w-full"
   >
     <v-form @submit.prevent="saveModel">
       <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
-          {{ action }} Product for {{ categoryTitle }}
+        <v-card-title class="tw-text-lg grey lighten-2">
+          {{ action }} {{ action === 'Edit' ? model.title : 'Product' }} for {{ categoryTitle }}
         </v-card-title>
 
         <v-card-text class="tw-mt-4">
@@ -17,11 +17,11 @@
                             :error-messages="errors"
               ></v-text-field>
             </ValidationProvider>
-            <div class="tw-flex tw-gap-x-3">
+            <div class="tw-flex tw-flex-col sm:tw-flex-row tw-gap-3">
               <div class="tw-flex tw-flex-col tw-gap-y-3">
                 <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
                               v-model="model.image" label="Image"></v-file-input>
-                <ImageViewer :image="model.image" :url="model.thumb_image_url"></ImageViewer>
+                <ImageViewer class="tw-h-28" :image="model.image" :url="model.thumb_image_url"></ImageViewer>
               </div>
               <div class="tw-grow">
                 <ValidationProvider name="Pricing Types" vid="pricing_types" rules="required" v-slot="{errors}">
