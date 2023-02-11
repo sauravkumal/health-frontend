@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="4" width="150">
+  <v-card ripple elevation="4" width="150">
     <v-img v-if="product.thumb_image_url" :src="product.thumb_image_url" height="70"></v-img>
     <div class="tw-p-2">
       <div class="tw-font-semibold">{{ product.title }}</div>
@@ -38,7 +38,7 @@
           <v-icon small>mdi-pencil</v-icon>
         </v-btn>
         <v-btn icon @mouseenter.native @mouseleave.native
-               color="error" @click="remove">
+               color="error" @click="remove" v-touch="remove">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
       </div>

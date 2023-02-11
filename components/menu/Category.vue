@@ -26,7 +26,7 @@
           <span v-else class="tw-tw-grow tw-text-base">{{ category.title }}</span>
           <div v-if="!edit" class="tw-flex tw-gap-2">
             <v-btn text @mouseenter.native @mouseleave.native icon
-                   color="primary" @click="showEdit">
+                   color="primary" @click="showEdit" v-touch="showEdit">
               <v-icon small>mdi-pencil</v-icon>
             </v-btn>
             <v-btn text @mouseenter.native @mouseleave.native
@@ -35,7 +35,7 @@
               <v-icon small>mdi-plus-box-outline</v-icon>
             </v-btn>
             <v-btn text @mouseenter.native @mouseleave.native icon
-                   color="error" @click="remove">
+                   color="error" @click="remove" v-touch="remove">
               <v-icon small>mdi-delete</v-icon>
             </v-btn>
           </div>
