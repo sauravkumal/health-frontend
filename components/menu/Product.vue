@@ -1,5 +1,5 @@
 <template>
-  <v-card ripple elevation="4" width="150">
+  <div>
     <v-img v-if="product.thumb_image_url" :src="product.thumb_image_url" height="70"></v-img>
     <div class="tw-p-2">
       <div class="tw-font-semibold">{{ product.title }}</div>
@@ -43,7 +43,7 @@
         </v-btn>
       </div>
     </div>
-  </v-card>
+  </div>
 </template>
 
 <script>
@@ -117,7 +117,6 @@ export default {
     },
 
     remove() {
-      console.log('remove')
       if (window.confirm('Are you sure you want to delete? This action cannot be undone.')) {
         this.$axios.delete("/backend/api/products/" + this.product.id)
           .then(resp => {
