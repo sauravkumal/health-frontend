@@ -3,7 +3,7 @@
     <table class="tw-w-full" @mouseenter="showActions=true" @mouseleave="showActions=false">
       <thead>
       <tr class="tw-w-full">
-        <td class="tw-flex tw-gap-x-4 tw-text-lg tw-pb-2 tw-items-center">
+        <td class="tw-flex tw-gap-2 tw-text-lg tw-pb-1 tw-items-center">
           <v-avatar size="20" color="primary" class="tw-text-white">{{ $vnode.key + 1 }}</v-avatar>
           <template v-if="edit">
             <v-form @submit.prevent="saveModel" class="tw-flex tw-gap-x-2 tw-items-center">
@@ -23,7 +23,7 @@
               </v-btn>
             </v-form>
           </template>
-          <span v-else class="tw-ml-4 tw-tw-grow">{{ category.title }}</span>
+          <span v-else class="tw-tw-grow tw-text-base">{{ category.title }}</span>
           <div v-if="showActions && !edit" class="tw-flex tw-gap-4">
             <v-btn text small @mouseenter.native @mouseleave.native icon
                    color="primary" @click="showEdit">

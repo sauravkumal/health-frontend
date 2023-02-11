@@ -4,9 +4,9 @@
   >
     <thead>
     <tr>
-      <td class="tw-flex tw-flex-wrap tw-gap-x-2 tw-bg-gray-200 tw-px-2 tw-text-base tw-py-1 tw-items-center">
+      <td class="tw-flex tw-flex-wrap tw-gap-x-1 tw-bg-gray-200 tw-px-2 tw-text-base tw-py-1 tw-items-center">
         <div>{{ $vnode.key + 1 }}.</div>
-        <div class="tw-ml-2">{{ product.title }}</div>
+        <div class="tw-text-sm tw-font-medium">{{ product.title }}</div>
         <template v-if="showActions">
           <v-btn icon x-small @mouseenter.native @mouseleave.native
                  @click="$emit('editProduct',{id:product.id,
