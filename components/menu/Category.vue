@@ -48,6 +48,7 @@
           <Draggable class="tw-flex tw-flex-wrap tw-gap-2" v-model="category.products"
                      @start="drag=true"
                      @end="drag=false"
+                     handle=".handle"
                      ghost-class="ghost">
             <Product :key="index"
                      v-on="$listeners"
