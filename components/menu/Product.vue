@@ -38,7 +38,7 @@
           <v-icon small>mdi-pencil</v-icon>
         </v-btn>
         <v-btn icon @mouseenter.native @mouseleave.native
-               color="error" @click="remove" v-touch="remove">
+               color="error" @click="remove">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
       </div>
