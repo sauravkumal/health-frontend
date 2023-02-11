@@ -15,26 +15,26 @@
                   ></v-text-field>
                 </ValidationProvider>
               </ValidationObserver>
-              <v-btn small type="submit" color="success" icon :loading="saving">
+              <v-btn type="submit" color="success" icon :loading="saving">
                 <v-icon small>mdi-check</v-icon>
               </v-btn>
-              <v-btn small color="error" icon @click="edit=false">
+              <v-btn color="error" icon @click="edit=false">
                 <v-icon small>mdi-close</v-icon>
               </v-btn>
             </v-form>
           </template>
           <span v-else class="tw-tw-grow tw-text-base">{{ category.title }}</span>
-          <div v-if="!edit" class="tw-flex tw-gap-4">
-            <v-btn text small @mouseenter.native @mouseleave.native icon
+          <div v-if="!edit" class="tw-flex tw-gap-2">
+            <v-btn text @mouseenter.native @mouseleave.native icon
                    color="primary" @click="showEdit">
               <v-icon small>mdi-pencil</v-icon>
             </v-btn>
-            <v-btn text small @mouseenter.native @mouseleave.native
+            <v-btn text @mouseenter.native @mouseleave.native
                    color="success" icon
                    @click="$emit('createProduct',{categoryId: category.id, position:category.products.length, categoryTitle: category.title})">
               <v-icon small>mdi-plus-box-outline</v-icon>
             </v-btn>
-            <v-btn text small @mouseenter.native @mouseleave.native icon
+            <v-btn text @mouseenter.native @mouseleave.native icon
                    color="error" @click="remove">
               <v-icon small>mdi-delete</v-icon>
             </v-btn>
