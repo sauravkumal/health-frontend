@@ -2,7 +2,7 @@
   <v-card class="!tw-bg-gray-100 tw-p-2 !animation" flat>
     <table class="tw-w-full">
       <thead>
-      <tr class="tw-w-full">
+      <tr class="tw-w-full handle">
         <td class="tw-flex tw-gap-2 tw-text-lg tw-pb-1 tw-items-center">
           <v-avatar size="20" color="primary" class="tw-text-white">{{ $vnode.key + 1 }}</v-avatar>
           <template v-if="edit">

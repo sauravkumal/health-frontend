@@ -25,6 +25,7 @@
     <v-card-text>
       <div>
         <Draggable class="tw-flex tw-flex-col tw-gap-y-4" v-model="menu.categories" @start="drag=true"
+                   handle=".handle"
                    @end="drag=false"
                    ghost-class="ghost">
           <Category @edited="fetch"

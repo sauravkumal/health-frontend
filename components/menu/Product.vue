@@ -1,7 +1,7 @@
 <template>
   <v-card ripple elevation="4" width="150">
-    <v-img v-if="product.thumb_image_url" :src="product.thumb_image_url" height="70"></v-img>
-    <div class="tw-p-2">
+    <v-img class="handle" v-if="product.thumb_image_url" :src="product.thumb_image_url" height="70"></v-img>
+    <div class="tw-p-2 handle">
       <div class="tw-font-semibold">{{ product.title }}</div>
       <div>
         <div
