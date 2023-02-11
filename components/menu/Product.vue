@@ -29,13 +29,13 @@
 
       </div>
       <div class="tw-flex tw-justify-between">
-        <v-btn small @mouseenter.native @mouseleave.native
+        <v-btn icon small @mouseenter.native @mouseleave.native
                @click="$emit('editProduct',{id:product.id,
                 categoryId: category.id,
                 position:category.products.length,
                 categoryTitle: category.title})"
-               color="primary">Edit
-          <!--          <v-icon small>mdi-pencil</v-icon>-->
+               color="primary">
+          <v-icon small>mdi-pencil</v-icon>
         </v-btn>
         <v-btn icon small @mouseenter.native @mouseleave.native
                color="error" @click="remove">
@@ -117,6 +117,7 @@ export default {
     },
 
     remove() {
+      console.log('remove')
       if (window.confirm('Are you sure you want to delete? This action cannot be undone.')) {
         this.$axios.delete("/backend/api/products/" + this.product.id)
           .then(resp => {
