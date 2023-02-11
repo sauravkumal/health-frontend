@@ -16,10 +16,10 @@
                 </ValidationProvider>
               </ValidationObserver>
               <v-btn small type="submit" color="success" icon :loading="saving">
-                <v-icon>mdi-check</v-icon>
+                <v-icon small>mdi-check</v-icon>
               </v-btn>
               <v-btn small color="error" icon @click="edit=false">
-                <v-icon>mdi-close</v-icon>
+                <v-icon small>mdi-close</v-icon>
               </v-btn>
             </v-form>
           </template>
@@ -27,16 +27,16 @@
           <div v-if="showActions && !edit" class="tw-flex tw-gap-4">
             <v-btn text small @mouseenter.native @mouseleave.native icon
                    color="primary" @click="showEdit">
-              <v-icon>mdi-pencil</v-icon>
+              <v-icon small>mdi-pencil</v-icon>
             </v-btn>
             <v-btn text small @mouseenter.native @mouseleave.native
-                   color="primary" icon
+                   color="success" icon
                    @click="$emit('createProduct',{categoryId: category.id, position:category.products.length, categoryTitle: category.title})">
-              <v-icon>mdi-plus-box-outline</v-icon>
+              <v-icon small>mdi-plus-box-outline</v-icon>
             </v-btn>
             <v-btn text small @mouseenter.native @mouseleave.native icon
                    color="error" @click="remove">
-              <v-icon>mdi-delete</v-icon>
+              <v-icon small>mdi-delete</v-icon>
             </v-btn>
           </div>
         </td>
