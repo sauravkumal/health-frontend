@@ -1,6 +1,6 @@
 <template>
   <v-card class="!tw-bg-gray-200 tw-p-2 !animation">
-    <table class="tw-w-full" @mouseenter="showActions=true" @mouseleave="showActions=false">
+    <table class="tw-w-full">
       <thead>
       <tr class="tw-w-full">
         <td class="tw-flex tw-gap-2 tw-text-lg tw-pb-1 tw-items-center">
@@ -24,7 +24,7 @@
             </v-form>
           </template>
           <span v-else class="tw-tw-grow tw-text-base">{{ category.title }}</span>
-          <div v-if="showActions && !edit" class="tw-flex tw-gap-4">
+          <div v-if="!edit" class="tw-flex tw-gap-4">
             <v-btn text small @mouseenter.native @mouseleave.native icon
                    color="primary" @click="showEdit">
               <v-icon small>mdi-pencil</v-icon>
@@ -72,7 +72,6 @@ export default {
   props: ['category'],
   data() {
     return {
-      showActions: false,
       drag: false,
       edit: false,
       model: null,
