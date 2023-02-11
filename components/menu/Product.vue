@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card ripple elevation="4" width="150">
     <v-img v-if="product.thumb_image_url" :src="product.thumb_image_url" height="70"></v-img>
     <div class="tw-p-2">
       <div class="tw-font-semibold">{{ product.title }}</div>
@@ -43,7 +43,7 @@
         </v-btn>
       </div>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>
