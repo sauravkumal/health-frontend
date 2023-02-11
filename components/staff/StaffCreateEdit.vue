@@ -10,9 +10,9 @@
         </v-card-title>
 
         <v-card-text class="tw-mt-4">
-          <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-space-y-3">
-            <div class="tw-flex tw-space-x-3">
-              <div class="tw-flex tw-flex-col tw-space-y-3">
+          <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-gap-y-3">
+            <div class="tw-flex tw-gap-x-3">
+              <div class="tw-flex tw-flex-col tw-gap-y-3">
                 <ValidationProvider name="Role" vid="role" rules="required" v-slot="{errors}">
                   <v-select :items="roles()"
                             item-text="title"
@@ -29,7 +29,7 @@
                               v-model="model.image" label="Profile"></v-file-input>
                 <ImageViewer :image="model.image" :url="model.thumb_image_url"></ImageViewer>
               </div>
-              <div class="tw-flex tw-flex-col tw-space-y-3">
+              <div class="tw-flex tw-flex-col tw-gap-y-3">
                 <ValidationProvider name="Name" vid="name" rules="required" v-slot="{errors}">
                   <v-text-field
                     dense

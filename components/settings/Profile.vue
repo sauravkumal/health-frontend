@@ -4,10 +4,10 @@
       <v-card-title>Profile</v-card-title>
       <v-card-text>
         <ValidationObserver ref="validator">
-          <ValidationProvider ref="validator" tag="div" class="tw-flex tw-space-x-6">
-            <div class="tw-flex tw-grow tw-flex-col tw-space-y-3 tw-self-start">
+          <ValidationProvider ref="validator" tag="div" class="tw-flex tw-gap-x-6">
+            <div class="tw-flex tw-grow tw-flex-col tw-gap-y-3 tw-self-start">
               <ValidationProvider name="Name" vid="name" rules="required" v-slot="{errors}"
-                                  class="tw-flex tw-space-x-4 tw-items-center">
+                                  class="tw-flex tw-gap-x-4 tw-items-center">
                 <label for="name">Name:</label>
                 <v-text-field
                   dense
@@ -20,7 +20,7 @@
               </ValidationProvider>
 
               <ValidationProvider name="Email" vid="email" rules="required|email" v-slot="{errors}"
-                                  class="tw-flex tw-space-x-4 tw-items-center">
+                                  class="tw-flex tw-gap-x-4 tw-items-center">
                 <label for="email">Email:</label>
                 <v-text-field
                   dense
@@ -33,7 +33,7 @@
               </ValidationProvider>
 
               <ValidationProvider name="Phone No" vid="phone_no" rules="required" v-slot="{errors}"
-                                  class="tw-flex tw-space-x-4 tw-items-center">
+                                  class="tw-flex tw-gap-x-4 tw-items-center">
                 <label for="phone_no">Phone No:</label>
                 <v-text-field
                   dense
@@ -46,7 +46,7 @@
               </ValidationProvider>
 
               <ValidationProvider name="Address" vid="address" rules="required" v-slot="{errors}"
-                                  class="tw-flex tw-space-x-4 tw-items-center">
+                                  class="tw-flex tw-gap-x-4 tw-items-center">
                 <label for="address">Address:</label>
                 <v-text-field
                   dense
@@ -58,12 +58,12 @@
                   item-value="value"/>
               </ValidationProvider>
             </div>
-            <div class="tw-flex tw-flex-col tw-space-y-3 tw-self-start">
+            <div class="tw-flex tw-flex-col tw-gap-y-3 tw-self-start">
               <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
                             v-model="model.image" label="Logo"></v-file-input>
               <ImageViewer width="200" :image="model.image" :url="model.thumb_image_url"></ImageViewer>
             </div>
-            <div class="tw-flex tw-flex-col tw-space-y-3 tw-self-start">
+            <div class="tw-flex tw-flex-col tw-gap-y-3 tw-self-start">
               <label>Select your location</label>
               <GMap class="tw-h-56 tw-w-96">
                 <GMapMarker :draggable="true" @dragend="setLatLng" v-if="model.lat && model.lng"

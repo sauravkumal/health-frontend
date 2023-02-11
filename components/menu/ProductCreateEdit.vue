@@ -10,15 +10,15 @@
         </v-card-title>
 
         <v-card-text class="tw-mt-4">
-          <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-space-y-3">
+          <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-gap-y-3">
             <ValidationProvider name="Title" vid="title" rules="required" v-slot="{errors}">
               <v-text-field v-model="model.title" dense label="Title" hide-details="auto"
                             outlined
                             :error-messages="errors"
               ></v-text-field>
             </ValidationProvider>
-            <div class="tw-flex tw-space-x-3">
-              <div class="tw-flex tw-flex-col tw-space-y-3">
+            <div class="tw-flex tw-gap-x-3">
+              <div class="tw-flex tw-flex-col tw-gap-y-3">
                 <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
                               v-model="model.image" label="Image"></v-file-input>
                 <ImageViewer :image="model.image" :url="model.thumb_image_url"></ImageViewer>
@@ -37,12 +37,12 @@
                             v-model="model.pricing_types" :error-messages="errors"></v-select>
                 </ValidationProvider>
 
-                <div class="tw-flex tw-flex-col tw-space-y-3" v-for="(detail, index) in model.pricing_details">
+                <div class="tw-flex tw-flex-col tw-gap-y-3" v-for="(detail, index) in model.pricing_details">
                   <div>
                     <div class="tw-my-2">Per <span class="tw-font-semibold">{{ pricingUnitsByKey[detail.type] }}</span>
                       Pricing
                     </div>
-                    <div class="tw-flex tw-space-x-3">
+                    <div class="tw-flex tw-gap-x-3">
                       <ValidationProvider name="Current Price" :vid="'current_price'+index.toString()" rules="required"
                                           v-slot="{errors}">
                         <v-text-field v-model="model.pricing_details[index].price" dense label="Current Price"

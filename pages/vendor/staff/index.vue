@@ -2,7 +2,7 @@
   <v-card elevation="4">
     <StaffCreateEdit @edited="fetch" @created="fetch" v-model="staffDialog" :id="selectedId"/>
     <v-card-title class="tw-justify-between">
-      <div class="tw-flex tw-space-x-2 tw-items-end">
+      <div class="tw-flex tw-gap-x-2 tw-items-end">
         <v-text-field
           hide-details
           label="Search.."
@@ -39,7 +39,7 @@
         </template>
 
         <template v-slot:item.name="{item}">
-          <div class="tw-py-2 tw-flex tw-space-x-2 tw-items-center">
+          <div class="tw-py-2 tw-flex tw-gap-x-2 tw-items-center">
             <v-badge bottom bordered dot color="success" :value="true" offset-y="12" offset-x="12">
               <v-avatar>
                 <v-icon size="50" class="tw-bg-gray-200">mdi-account</v-icon>

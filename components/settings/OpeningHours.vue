@@ -3,7 +3,7 @@
     <v-card elevation="4">
       <v-card-title>Opening Hours</v-card-title>
       <v-card-text>
-        <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-space-y-2">
+        <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-gap-y-2">
           <div class="tw-grid tw-grid-cols-12 tw-gap-x-2 tw-items-center"
                v-for="(item, index) in model.opening_hours"
                :key="index">

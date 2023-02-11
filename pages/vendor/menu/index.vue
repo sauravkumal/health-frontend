@@ -1,11 +1,11 @@
 <template>
   <v-card elevation="4">
     <v-card-title class="tw-justify-between">
-      <div class="tw-flex tw-space-x-6 tw-items-center">
+      <div class="tw-flex tw-gap-x-6 tw-items-center">
         <div>Menu</div>
         <v-switch color="success" label="Published" v-model="menu.published"></v-switch>
       </div>
-      <div class="tw-flex tw-space-x-2 tw-items-end">
+      <div class="tw-flex tw-gap-2 tw-items-end tw-flex-wrap">
         <CategoryCreate @created="fetch" :position="menu.categories.length"></CategoryCreate>
         <ProductCreateEdit @created="fetch" v-model="productModel.dialog" :category-id="productModel.categoryId"
                            :category-title="productModel.categoryTitle"
@@ -24,7 +24,7 @@
     </v-card-title>
     <v-card-text>
       <div>
-        <Draggable class="tw-flex tw-flex-col tw-space-y-4" v-model="menu.categories" @start="drag=true"
+        <Draggable class="tw-flex tw-flex-col tw-gap-y-4" v-model="menu.categories" @start="drag=true"
                    @end="drag=false"
                    ghost-class="ghost">
           <Category @edited="fetch"
@@ -76,9 +76,9 @@ export default {
       const ref = this.$refs.categories.find(cat => cat.category.id === newVal)
       if (ref) {
         this.$vuetify.goTo(ref)
-        ref.$el.classList.add('tw-bg-gray-400')
+        ref.$el.classList.add('!tw-bg-gray-400')
         this.animationTimeout = setTimeout(() => {
-          ref.$el.classList.remove('tw-bg-gray-400')
+          ref.$el.classList.remove('!tw-bg-gray-400')
         }, 1000)
       }
     },
