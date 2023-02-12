@@ -10,6 +10,7 @@
         <ProductCreateEdit @created="fetch" v-model="productModel.dialog" :category-id="productModel.categoryId"
                            :category-title="productModel.categoryTitle"
                            :id="productModel.id"
+                           :product="productModel.product"
                            :position="productModel.position"/>
 
         <v-select single-line outlined label="Search.."

@@ -91,7 +91,7 @@ import {difference} from 'lodash'
 export default {
   name: "ProductCreateEdit",
   components: {ImageViewer},
-  props: ['position', 'categoryId', 'value', 'categoryTitle', 'id'],
+  props: ['position', 'categoryId', 'value', 'categoryTitle', 'id', 'product'],
   data() {
     return {
       dialog: this.value,
@@ -152,7 +152,7 @@ export default {
     id: {
       handler: function (newVal) {
         if (newVal) {
-          this.fetchModel()
+          this.model = this.product
         }
       },
       immediate: true

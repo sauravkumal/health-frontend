@@ -33,6 +33,7 @@
                @click="$emit('editProduct',{id:product.id,
                 categoryId: category.id,
                 position:category.products.length,
+                product: product,
                 categoryTitle: category.title})"
                color="primary">
           <v-icon small>mdi-pencil</v-icon>

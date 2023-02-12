@@ -1,6 +1,6 @@
 <template>
   <v-form @submit.prevent="saveModel">
-    <v-card  elevation="4">
+    <v-card elevation="4">
       <v-card-title>Profile</v-card-title>
       <v-card-text>
         <ValidationObserver ref="validator">
@@ -61,7 +61,7 @@
             <div class="tw-flex tw-flex-col tw-gap-y-3 tw-self-start">
               <v-file-input prepend-icon="" prepend-inner-icon="mdi-attachment" dense hide-details outlined
                             v-model="model.image" label="Logo"></v-file-input>
-              <ImageViewer width="200" :image="model.image" :url="model.thumb_image_url"></ImageViewer>
+              <ImageViewer class="tw-w-32" :image="model.image" :url="model.thumb_image_url"></ImageViewer>
             </div>
             <div class="tw-flex tw-flex-col tw-gap-y-3 tw-self-start">
               <label>Select your location</label>
