@@ -4,7 +4,7 @@
     width="800"
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-btn color="success" v-bind="attrs" v-on="on">
+      <v-btn color="success" small v-bind="attrs" v-on="on">
         Add
       </v-btn>
     </template>
