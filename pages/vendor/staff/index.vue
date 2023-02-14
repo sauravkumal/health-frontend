@@ -1,8 +1,9 @@
 <template>
   <v-card elevation="4">
     <StaffCreateEdit @edited="fetch" @created="fetch" v-model="staffDialog" :id="selectedId"/>
-    <v-card-title class="tw-justify-between">
-      <div class="tw-flex tw-gap-x-2 tw-items-end">
+    <v-card-title class="tw-justify-between !tw-p-1">
+      <div class="tw-flex tw-gap-x-2 tw-items-end tw-justify-between">
+        <v-btn color="success" @click="showDialog(null)">Add</v-btn>
         <v-text-field
           hide-details
           label="Search.."
@@ -12,13 +13,9 @@
           outlined
           prepend-inner-icon="mdi-magnify"
           v-model:trim="search"></v-text-field>
-        <v-btn outlined color="primary" @click="showDialog(null)">Add Staff</v-btn>
       </div>
-      <v-btn color="primary" icon @click="fetch">
-        <v-icon>mdi-refresh</v-icon>
-      </v-btn>
     </v-card-title>
-    <v-card-text>
+    <v-card-text class="!tw-px-1">
       <v-data-table
         dense
         :hide-default-footer="true"

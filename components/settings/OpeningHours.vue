@@ -1,8 +1,8 @@
 <template>
   <v-form @submit.prevent="saveModel">
     <v-card elevation="4">
-      <v-card-title>Opening Hours</v-card-title>
-      <v-card-text>
+      <v-card-title class="!tw-p-1">Opening Hours</v-card-title>
+      <v-card-text class="!tw-px-1">
         <ValidationObserver ref="validator" tag="div" class="tw-flex tw-flex-col tw-gap-y-2">
           <div class="tw-grid tw-grid-cols-12 tw-gap-x-2 tw-items-center"
                v-for="(item, index) in model.opening_hours"

@@ -21,7 +21,7 @@
                          :product="productModel.product"
                          :position="productModel.position"/>
     </v-card-title>
-    <v-card-text>
+    <v-card-text class="!tw-px-1">
       <div>
         <Draggable class="tw-flex tw-flex-col tw-gap-y-4" v-model="menu.categories" @start="drag=true"
                    handle=".handle"

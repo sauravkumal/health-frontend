@@ -1,8 +1,8 @@
 <template>
   <v-form @submit.prevent="saveModel">
     <v-card elevation="4">
-      <v-card-title>Profile</v-card-title>
-      <v-card-text>
+      <v-card-title class="!tw-p-1">Profile</v-card-title>
+      <v-card-text class="!tw-px-1">
         <ValidationObserver ref="validator">
           <ValidationProvider ref="validator" tag="div" class="tw-flex tw-gap-x-6">
             <div class="tw-flex tw-grow tw-flex-col tw-gap-y-3 tw-self-start">
