@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="4">
     <v-card-title class="tw-justify-between tw-gap-x-4 tw-gap-y-2 !tw-p-1">
-      <div class="tw-flex tw-gap-x-6 tw-gap-y-2 tw-items-center">
+      <div class="tw-flex tw-gap-x-4 tw-gap-y-2 tw-items-center">
         <div>Menu</div>
         <v-switch color="success" label="Published" v-model="menu.published"></v-switch>
         <CategoryCreate @created="fetch" :position="menu.categories.length"></CategoryCreate>
