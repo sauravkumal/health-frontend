@@ -25,16 +25,16 @@
           </template>
           <span v-else class="tw-tw-grow tw-text-base handle">{{ category.title }}</span>
           <div v-if="!edit" class="tw-flex tw-gap-2">
-            <v-btn text @mouseenter.native @mouseleave.native icon
+            <v-btn text icon
                    color="primary" @click="showEdit">
               <v-icon small>mdi-pencil</v-icon>
             </v-btn>
-            <v-btn text @mouseenter.native @mouseleave.native
+            <v-btn text
                    color="success" icon
                    @click="$emit('createProduct',{categoryId: category.id, position:category.products.length, categoryTitle: category.title})">
               <v-icon small>mdi-plus-box-outline</v-icon>
             </v-btn>
-            <v-btn text @mouseenter.native @mouseleave.native icon
+            <v-btn text icon
                    color="error" @click="remove">
               <v-icon small>mdi-delete</v-icon>
             </v-btn>

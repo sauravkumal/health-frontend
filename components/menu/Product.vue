@@ -29,7 +29,7 @@
 
       </div>
       <div class="tw-flex tw-justify-between">
-        <v-btn icon small @mouseenter.native @mouseleave.native
+        <v-btn icon small
                @click="$emit('editProduct',{id:product.id,
                 categoryId: category.id,
                 position:category.products.length,
@@ -38,7 +38,7 @@
                color="primary">
           <v-icon small>mdi-pencil</v-icon>
         </v-btn>
-        <v-btn icon small @mouseenter.native @mouseleave.native
+        <v-btn icon small
                color="error" @click="remove">
           <v-icon small>mdi-delete</v-icon>
         </v-btn>
