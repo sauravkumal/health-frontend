@@ -86,7 +86,7 @@ export default {
   pwa: {
     meta: {
       name: 'FoodMenu',
-      theme_color: '#ffffff'
+      theme_color: '#f5f5f5'
     },
     manifest: {
       name: 'Food Menu',
