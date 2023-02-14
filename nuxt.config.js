@@ -85,7 +85,8 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     meta: {
-      name: 'FoodMenu'
+      name: 'FoodMenu',
+      theme_color: '#ffffff'
     },
     manifest: {
       name: 'Food Menu',
