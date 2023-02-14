@@ -1,27 +1,25 @@
 <template>
   <v-card elevation="4">
-    <v-card-title class="tw-justify-between">
-      <div class="tw-flex tw-gap-x-6 tw-items-center">
+    <v-card-title class="tw-justify-between tw-gap-4">
+      <div class="tw-flex tw-gap-6 tw-items-center">
         <div>Menu</div>
         <v-switch color="success" label="Published" v-model="menu.published"></v-switch>
-      </div>
-      <div class="tw-flex tw-gap-2 tw-items-end tw-flex-wrap">
         <CategoryCreate @created="fetch" :position="menu.categories.length"></CategoryCreate>
-        <ProductCreateEdit @created="fetch" v-model="productModel.dialog" :category-id="productModel.categoryId"
-                           :category-title="productModel.categoryTitle"
-                           :id="productModel.id"
-                           :product="productModel.product"
-                           :position="productModel.position"/>
-
-        <v-select single-line outlined label="Search.."
-                  dense hide-details
-                  :items="menu.categories"
-                  item-text="title"
-                  item-value="id"
-                  v-model="search"
-                  clearable
-                  prepend-inner-icon="mdi-magnify"></v-select>
       </div>
+
+      <v-select single-line outlined label="Search.."
+                dense hide-details
+                :items="menu.categories"
+                item-text="title"
+                item-value="id"
+                v-model="search"
+                clearable
+                prepend-inner-icon="mdi-magnify"></v-select>
+      <ProductCreateEdit @created="fetch" v-model="productModel.dialog" :category-id="productModel.categoryId"
+                         :category-title="productModel.categoryTitle"
+                         :id="productModel.id"
+                         :product="productModel.product"
+                         :position="productModel.position"/>
     </v-card-title>
     <v-card-text>
       <div>
