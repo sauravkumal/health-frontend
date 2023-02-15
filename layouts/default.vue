@@ -11,7 +11,7 @@
       <v-list shaped dense>
         <v-list-item>
           <div class="tw-text-3xl tw-text-orange-700">
-            GFC
+            Tracking
           </div>
         </v-list-item>
         <template v-for="(item,index) in items">
@@ -186,29 +186,6 @@ export default {
         },
       ],
 
-      vendorItems: [
-        {
-          icon: 'mdi-home',
-          title: 'Dashboard',
-          to: '/'
-        },
-        {
-          icon: 'mdi-home',
-          title: 'Menu',
-          to: '/vendor/menu'
-        },
-        {
-          icon: 'mdi-account-group-outline',
-          title: 'Staff',
-          to: '/vendor/staff'
-        },
-        {
-          icon: 'mdi-account-cog',
-          title: 'Settings',
-          to: '/vendor/settings'
-        },
-      ],
-
       snackbar: false,
       snackbarColor: undefined,
       snackbarText: '',
@@ -216,11 +193,6 @@ export default {
   },
   computed: {
     items() {
-      const role = this.$auth.user.role
-      const type = this.$auth.user.type
-      if (role === 'vendor') {
-        return this.vendorItems
-      }
       return this.adminItems
     },
   },
