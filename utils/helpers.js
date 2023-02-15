@@ -8,9 +8,3 @@ export const buildFormData = (formData, data, parentKey) => {
     formData.append(parentKey, value);
   }
 }
-
-export const currency = (price) => {
-  return parseFloat(price).toLocaleString('en-IN', {
-    maximumFractionDigits: 2,
-  })
-}

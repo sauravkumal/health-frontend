@@ -11,8 +11,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - FoodMenu',
-    title: 'FoodMenu',
+    titleTemplate: '%s - Tracking',
+    title: 'Tracking',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -32,8 +32,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {src: '~/plugins/vee-validate.js'},
-    {src: '~/plugins/global.js'},
-    {src: '~/plugins/google-maps.js'}
+    {src: '~/plugins/global.js'}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -71,13 +70,12 @@ export default {
   },
 
   publicRuntimeConfig: {
-    mapsApiKey: process.env.MAPS_API_KEY,
     environment: process.env.NODE_ENV
   },
 
   proxy: {
     '/backend': {
-      target: process.env.API_URL,
+      target: process.env.PROXY_URL,
       pathRewrite: {'^/backend': '/'}
     }
   },
@@ -85,12 +83,11 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     meta: {
-      name: 'FoodMenu',
-      theme_color: '#f5f5f5'
+      name: 'Tracking'
     },
     manifest: {
-      name: 'Food Menu',
-      short_name: 'FoodMenu'
+      name: 'Tracking',
+      short_name: 'Tracking'
     },
     workbox: {
       enabled: true
