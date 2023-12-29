@@ -1,9 +1,9 @@
 {
-  "name": "foodmenu-frontend",
+  "name": "health",
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "^16.14.0"
+    "node": "^18.14.0"
   },
   "scripts": {
     "dev": "nuxt",

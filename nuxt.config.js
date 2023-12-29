@@ -11,8 +11,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - Tracking',
-    title: 'Tracking',
+    titleTemplate: '%s - Health',
+    title: 'Health',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -83,14 +83,14 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     meta: {
-      name: 'Tracking'
+      name: 'Health'
     },
     manifest: {
-      name: 'Tracking',
-      short_name: 'Tracking'
+      name: 'Health',
+      short_name: 'Health'
     },
     workbox: {
-      enabled: true
+      enabled: false
     }
   },
 
@@ -130,6 +130,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: ['vee-validate'],
     postcss: {
       plugins: {
         tailwindcss: {},

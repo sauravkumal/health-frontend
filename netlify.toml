@@ -1,9 +1,9 @@
 [build.environment]
-  API_URL = "https://api-tracking.sauravkumal.com.np"
-  NODE_VERSION= "16"
+  API_URL = "https://api-health.sauravkumal.com.np"
+  NODE_VERSION= "18"
 
 [[redirects]]
   from = "/backend/*"
-  to = "https://api-tracking.sauravkumal.com.np/:splat"
+  to = "https://api-health.sauravkumal.com.np/:splat"
   status = 200
   force = true
