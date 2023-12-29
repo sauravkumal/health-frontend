@@ -10,8 +10,11 @@
     >
       <v-list shaped dense>
         <v-list-item>
+          <v-list-item-avatar>
+            <v-img src="/healthcare.png"></v-img>
+          </v-list-item-avatar>
           <div class="tw-text-3xl tw-text-orange-700">
-            Tracking
+            Health
           </div>
         </v-list-item>
         <template v-for="(item,index) in items">
