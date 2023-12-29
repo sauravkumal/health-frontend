@@ -1,5 +1,4 @@
 [build.environment]
-  API_URL = "https://api-health.sauravkumal.com.np"
   NODE_VERSION= "18"
 
 [[redirects]]

@@ -10,7 +10,7 @@
     "dev-lan": "NUXT_HOST=0.0.0.0 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "set NODE_OPTIONS=--openssl-legacy-provider && nuxt generate"
+    "generate": "export NODE_OPTIONS=--openssl-legacy-provider  && nuxt generate"
   },
   "dependencies": {
     "@nuxt/postcss8": "^1.1.3",
