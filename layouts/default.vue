@@ -14,7 +14,7 @@
             <v-img src="/healthcare.png"></v-img>
           </v-list-item-avatar>
           <div class="tw-text-3xl tw-text-orange-700">
-            Health
+            Health Tracker
           </div>
         </v-list-item>
         <template v-for="(item,index) in items">
