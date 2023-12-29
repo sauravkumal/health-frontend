@@ -133,9 +133,11 @@ export default {
   build: {
     transpile: ['vee-validate'],
     postcss: {
-      plugins: {
-        tailwindcss: {},
-        autoprefixer: {}
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {}
+        }
       }
     }
   }
