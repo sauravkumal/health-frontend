@@ -8,3 +8,13 @@ export const buildFormData = (formData, data, parentKey) => {
     formData.append(parentKey, value);
   }
 }
+
+export const handleError = (error, context, validator = null) => {
+  if (error.response.status === 422 && validator) {
+    validator.setErrors(error.data.errors)
+  } else if (error.response.status === 423) {
+    context.$root.$emit('toast', {text: error.response.data.error, type: 'error'})
+  } else {
+    context.$root.$emit('toast', {text: error.statusText, type: 'error'})
+  }
+}

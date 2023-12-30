@@ -181,11 +181,16 @@ export default {
     return {
       notificationDrawer: false,
       drawer: !this.$vuetify.breakpoint.smAndDown,
-      adminItems: [
+      items: [
         {
           icon: 'mdi-home',
           title: 'Dashboard',
           to: '/'
+        },
+        {
+          icon: 'mdi-account-group',
+          title: 'Users',
+          to: '/user'
         },
       ],
 
@@ -193,19 +198,6 @@ export default {
       snackbarColor: undefined,
       snackbarText: '',
     }
-  },
-  computed: {
-    items() {
-      return this.adminItems
-    },
-  },
-
-  watch: {
-    searchItem: function (newVal) {
-      if (newVal && newVal.to) {
-        this.$router.push(newVal.to)
-      }
-    },
   },
   created() {
     this.$root.$on('toast', (event) => {
