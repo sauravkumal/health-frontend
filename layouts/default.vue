@@ -11,9 +11,9 @@
       <v-list shaped dense>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/healthcare.png"></v-img>
+            <v-img height="35" contain src="/healthcare.png"></v-img>
           </v-list-item-avatar>
-          <div class="tw-text-2xl tw-text-orange-700">
+          <div class="tw-text-xl tw-text-orange-700">
             Health Tracker
           </div>
         </v-list-item>
