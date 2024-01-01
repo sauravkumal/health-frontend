@@ -22,6 +22,7 @@ export default defineComponent({
         {text: 'Username', align: 'start', sortable: false, value: 'username'},
         {text: 'Age', align: 'start', sortable: false, value: 'age'},
         {text: 'Gender', align: 'start', sortable: false, value: 'gender'},
+        {text: 'Reminder', align: 'start', sortable: false, value: 'reminder'},
         {text: 'Actions', align: 'start', sortable: false, value: 'actions'},
       ],
       search: '',
